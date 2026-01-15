@@ -230,14 +230,14 @@ class LandingPageBuilder {
                     <tr>
                         <th><label>Dimensione Font (px)</label></th>
                         <td>
-                            <input type="number" class="fp-lp-field" data-field="font_size" value="<?php echo esc_attr($data['font_size'] ?? ''); ?>" placeholder="36" min="12" max="120" style="width: 100%;">
+                            <input type="number" class="fp-lp-field" data-field="font_size" value="<?php echo esc_attr(isset($data['font_size']) ? $data['font_size'] : ''); ?>" placeholder="36" min="12" max="120" style="width: 100%;">
                             <p class="description">Dimensione del font in pixel (es: 36 per H1, 24 per H2)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Colore Testo</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="text_color" value="<?php echo esc_attr($data['text_color'] ?? ''); ?>" placeholder="#333333" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="text_color" value="<?php echo esc_attr(isset($data['text_color']) ? $data['text_color'] : ''); ?>" placeholder="#333333" style="width: 100%;">
                             <p class="description">Colore del testo (es: #333333, #000000)</p>
                         </td>
                     </tr>
@@ -245,12 +245,12 @@ class LandingPageBuilder {
                         <th><label>Peso Font</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="font_weight">
-                                <option value="" <?php selected($data['font_weight'] ?? '', ''); ?>>Default</option>
-                                <option value="300" <?php selected($data['font_weight'] ?? '', '300'); ?>>300 (Light)</option>
-                                <option value="400" <?php selected($data['font_weight'] ?? '', '400'); ?>>400 (Normal)</option>
-                                <option value="600" <?php selected($data['font_weight'] ?? '', '600'); ?>>600 (Semi-Bold)</option>
-                                <option value="700" <?php selected($data['font_weight'] ?? '', '700'); ?>>700 (Bold)</option>
-                                <option value="800" <?php selected($data['font_weight'] ?? '', '800'); ?>>800 (Extra-Bold)</option>
+                                <option value="" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', ''); ?>>Default</option>
+                                <option value="300" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', '300'); ?>>300 (Light)</option>
+                                <option value="400" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', '400'); ?>>400 (Normal)</option>
+                                <option value="600" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', '600'); ?>>600 (Semi-Bold)</option>
+                                <option value="700" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', '700'); ?>>700 (Bold)</option>
+                                <option value="800" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', '800'); ?>>800 (Extra-Bold)</option>
                             </select>
                         </td>
                     </tr>
@@ -265,21 +265,21 @@ class LandingPageBuilder {
                     <tr>
                         <th><label>Font Size Mobile (px)</label></th>
                         <td>
-                            <input type="number" class="fp-lp-field" data-field="font_size_mobile" value="<?php echo esc_attr($data['font_size_mobile'] ?? ''); ?>" placeholder="24" min="12" max="120" style="width: 100%;">
+                            <input type="number" class="fp-lp-field" data-field="font_size_mobile" value="<?php echo esc_attr(isset($data['font_size_mobile']) ? $data['font_size_mobile'] : ''); ?>" placeholder="24" min="12" max="120" style="width: 100%;">
                             <p class="description">Dimensione font su mobile (&lt;768px)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Font Size Tablet (px)</label></th>
                         <td>
-                            <input type="number" class="fp-lp-field" data-field="font_size_tablet" value="<?php echo esc_attr($data['font_size_tablet'] ?? ''); ?>" placeholder="30" min="12" max="120" style="width: 100%;">
+                            <input type="number" class="fp-lp-field" data-field="font_size_tablet" value="<?php echo esc_attr(isset($data['font_size_tablet']) ? $data['font_size_tablet'] : ''); ?>" placeholder="30" min="12" max="120" style="width: 100%;">
                             <p class="description">Dimensione font su tablet (768px-1024px)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Font Size Desktop (px)</label></th>
                         <td>
-                            <input type="number" class="fp-lp-field" data-field="font_size_desktop" value="<?php echo esc_attr($data['font_size_desktop'] ?? ''); ?>" placeholder="36" min="12" max="120" style="width: 100%;">
+                            <input type="number" class="fp-lp-field" data-field="font_size_desktop" value="<?php echo esc_attr(isset($data['font_size_desktop']) ? $data['font_size_desktop'] : ''); ?>" placeholder="36" min="12" max="120" style="width: 100%;">
                             <p class="description">Dimensione font su desktop (&gt;1024px)</p>
                         </td>
                     </tr>
@@ -287,10 +287,10 @@ class LandingPageBuilder {
                         <th><label>Allineamento Mobile</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_mobile">
-                                <option value="" <?php selected($data['align_mobile'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_mobile'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_mobile'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_mobile'] ?? '', 'right'); ?>>Destra</option>
+                                <option value="" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'right'); ?>>Destra</option>
                             </select>
                         </td>
                     </tr>
@@ -298,10 +298,10 @@ class LandingPageBuilder {
                         <th><label>Allineamento Tablet</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_tablet">
-                                <option value="" <?php selected($data['align_tablet'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_tablet'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_tablet'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_tablet'] ?? '', 'right'); ?>>Destra</option>
+                                <option value="" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'right'); ?>>Destra</option>
                             </select>
                         </td>
                     </tr>
@@ -309,10 +309,10 @@ class LandingPageBuilder {
                         <th><label>Allineamento Desktop</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_desktop">
-                                <option value="" <?php selected($data['align_desktop'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_desktop'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_desktop'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_desktop'] ?? '', 'right'); ?>>Destra</option>
+                                <option value="" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'right'); ?>>Destra</option>
                             </select>
                         </td>
                     </tr>
@@ -331,7 +331,7 @@ class LandingPageBuilder {
             <tr>
                 <th><label>Contenuto</label></th>
                 <td>
-                    <textarea class="fp-lp-field" data-field="content" rows="8" style="width: 100%;"><?php echo esc_textarea($data['content'] ?? ''); ?></textarea>
+                    <textarea class="fp-lp-field" data-field="content" rows="8" style="width: 100%;"><?php echo esc_textarea(isset($data['content']) ? $data['content'] : ''); ?></textarea>
                     <p class="description">HTML consentito</p>
                 </td>
             </tr>
@@ -356,11 +356,11 @@ class LandingPageBuilder {
                         <th><label>Allineamento Mobile</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_mobile">
-                                <option value="" <?php selected($data['align_mobile'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_mobile'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_mobile'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_mobile'] ?? '', 'right'); ?>>Destra</option>
-                                <option value="justify" <?php selected($data['align_mobile'] ?? '', 'justify'); ?>>Giustificato</option>
+                                <option value="" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'right'); ?>>Destra</option>
+                                <option value="justify" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'justify'); ?>>Giustificato</option>
                             </select>
                         </td>
                     </tr>
@@ -368,11 +368,11 @@ class LandingPageBuilder {
                         <th><label>Allineamento Tablet</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_tablet">
-                                <option value="" <?php selected($data['align_tablet'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_tablet'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_tablet'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_tablet'] ?? '', 'right'); ?>>Destra</option>
-                                <option value="justify" <?php selected($data['align_tablet'] ?? '', 'justify'); ?>>Giustificato</option>
+                                <option value="" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'right'); ?>>Destra</option>
+                                <option value="justify" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'justify'); ?>>Giustificato</option>
                             </select>
                         </td>
                     </tr>
@@ -380,11 +380,11 @@ class LandingPageBuilder {
                         <th><label>Allineamento Desktop</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_desktop">
-                                <option value="" <?php selected($data['align_desktop'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_desktop'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_desktop'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_desktop'] ?? '', 'right'); ?>>Destra</option>
-                                <option value="justify" <?php selected($data['align_desktop'] ?? '', 'justify'); ?>>Giustificato</option>
+                                <option value="" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'right'); ?>>Destra</option>
+                                <option value="justify" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'justify'); ?>>Giustificato</option>
                             </select>
                         </td>
                     </tr>
@@ -429,7 +429,7 @@ class LandingPageBuilder {
             <tr>
                 <th><label>Alt Text</label></th>
                 <td>
-                    <input type="text" class="fp-lp-field" data-field="alt" value="<?php echo esc_attr($data['alt'] ?? ''); ?>" style="width: 100%;" placeholder="Testo alternativo">
+                    <input type="text" class="fp-lp-field" data-field="alt" value="<?php echo esc_attr(isset($data['alt']) ? $data['alt'] : ''); ?>" style="width: 100%;" placeholder="Testo alternativo">
                 </td>
             </tr>
             <tr>
@@ -445,7 +445,7 @@ class LandingPageBuilder {
             <tr>
                 <th><label>Link (URL)</label></th>
                 <td>
-                    <input type="url" class="fp-lp-field" data-field="link" value="<?php echo esc_attr($data['link'] ?? ''); ?>" style="width: 100%;" placeholder="https://">
+                    <input type="url" class="fp-lp-field" data-field="link" value="<?php echo esc_attr(isset($data['link']) ? $data['link'] : ''); ?>" style="width: 100%;" placeholder="https://">
                 </td>
             </tr>
         </table>
@@ -457,21 +457,21 @@ class LandingPageBuilder {
                     <tr>
                         <th><label>Max Width (px o %)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="max_width" value="<?php echo esc_attr($data['max_width'] ?? ''); ?>" placeholder="800px o 100%" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="max_width" value="<?php echo esc_attr(isset($data['max_width']) ? $data['max_width'] : ''); ?>" placeholder="800px o 100%" style="width: 100%;">
                             <p class="description">Larghezza massima dell'immagine (es: "800px", "100%", "50vw")</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Border Radius (px)</label></th>
                         <td>
-                            <input type="number" class="fp-lp-field" data-field="border_radius" value="<?php echo esc_attr($data['border_radius'] ?? ''); ?>" placeholder="0" min="0" max="50" style="width: 100%;">
+                            <input type="number" class="fp-lp-field" data-field="border_radius" value="<?php echo esc_attr(isset($data['border_radius']) ? $data['border_radius'] : ''); ?>" placeholder="0" min="0" max="50" style="width: 100%;">
                             <p class="description">Arrotondamento degli angoli (0-50px)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Box Shadow</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="box_shadow" value="<?php echo esc_attr($data['box_shadow'] ?? ''); ?>" placeholder="0 2px 8px rgba(0,0,0,0.1)" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="box_shadow" value="<?php echo esc_attr(isset($data['box_shadow']) ? $data['box_shadow'] : ''); ?>" placeholder="0 2px 8px rgba(0,0,0,0.1)" style="width: 100%;">
                             <p class="description">Ombra CSS personalizzata (es: "0 2px 8px rgba(0,0,0,0.1)")</p>
                         </td>
                     </tr>
@@ -486,21 +486,21 @@ class LandingPageBuilder {
             <tr>
                 <th><label>Max Width Mobile (px o %)</label></th>
                 <td>
-                    <input type="text" class="fp-lp-field" data-field="max_width_mobile" value="<?php echo esc_attr($data['max_width_mobile'] ?? ''); ?>" placeholder="100%" style="width: 100%;">
+                    <input type="text" class="fp-lp-field" data-field="max_width_mobile" value="<?php echo esc_attr(isset($data['max_width_mobile']) ? $data['max_width_mobile'] : ''); ?>" placeholder="100%" style="width: 100%;">
                     <p class="description">Larghezza massima su mobile (&lt;768px)</p>
                 </td>
             </tr>
             <tr>
                 <th><label>Max Width Tablet (px o %)</label></th>
                 <td>
-                    <input type="text" class="fp-lp-field" data-field="max_width_tablet" value="<?php echo esc_attr($data['max_width_tablet'] ?? ''); ?>" placeholder="80%" style="width: 100%;">
+                    <input type="text" class="fp-lp-field" data-field="max_width_tablet" value="<?php echo esc_attr(isset($data['max_width_tablet']) ? $data['max_width_tablet'] : ''); ?>" placeholder="80%" style="width: 100%;">
                     <p class="description">Larghezza massima su tablet (768px-1024px)</p>
                 </td>
             </tr>
             <tr>
                 <th><label>Max Width Desktop (px o %)</label></th>
                 <td>
-                    <input type="text" class="fp-lp-field" data-field="max_width_desktop" value="<?php echo esc_attr($data['max_width_desktop'] ?? ''); ?>" placeholder="800px" style="width: 100%;">
+                    <input type="text" class="fp-lp-field" data-field="max_width_desktop" value="<?php echo esc_attr(isset($data['max_width_desktop']) ? $data['max_width_desktop'] : ''); ?>" placeholder="800px" style="width: 100%;">
                     <p class="description">Larghezza massima su desktop (&gt;1024px)</p>
                 </td>
             </tr>
@@ -508,10 +508,10 @@ class LandingPageBuilder {
                 <th><label>Allineamento Mobile</label></th>
                 <td>
                     <select class="fp-lp-field" data-field="align_mobile">
-                        <option value="" <?php selected($data['align_mobile'] ?? '', ''); ?>>Usa allineamento generale</option>
-                        <option value="left" <?php selected($data['align_mobile'] ?? '', 'left'); ?>>Sinistra</option>
-                        <option value="center" <?php selected($data['align_mobile'] ?? '', 'center'); ?>>Centro</option>
-                        <option value="right" <?php selected($data['align_mobile'] ?? '', 'right'); ?>>Destra</option>
+                        <option value="" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', ''); ?>>Usa allineamento generale</option>
+                        <option value="left" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'left'); ?>>Sinistra</option>
+                        <option value="center" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'center'); ?>>Centro</option>
+                        <option value="right" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'right'); ?>>Destra</option>
                     </select>
                 </td>
             </tr>
@@ -519,10 +519,10 @@ class LandingPageBuilder {
                 <th><label>Allineamento Tablet</label></th>
                 <td>
                     <select class="fp-lp-field" data-field="align_tablet">
-                        <option value="" <?php selected($data['align_tablet'] ?? '', ''); ?>>Usa allineamento generale</option>
-                        <option value="left" <?php selected($data['align_tablet'] ?? '', 'left'); ?>>Sinistra</option>
-                        <option value="center" <?php selected($data['align_tablet'] ?? '', 'center'); ?>>Centro</option>
-                        <option value="right" <?php selected($data['align_tablet'] ?? '', 'right'); ?>>Destra</option>
+                        <option value="" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', ''); ?>>Usa allineamento generale</option>
+                        <option value="left" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'left'); ?>>Sinistra</option>
+                        <option value="center" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'center'); ?>>Centro</option>
+                        <option value="right" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'right'); ?>>Destra</option>
                     </select>
                 </td>
             </tr>
@@ -530,10 +530,10 @@ class LandingPageBuilder {
                         <th><label>Allineamento Desktop</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_desktop">
-                                <option value="" <?php selected($data['align_desktop'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_desktop'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_desktop'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_desktop'] ?? '', 'right'); ?>>Destra</option>
+                                <option value="" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'right'); ?>>Destra</option>
                             </select>
                         </td>
                     </tr>
@@ -547,7 +547,7 @@ class LandingPageBuilder {
      * Campi Galleria
      */
     private function render_gallery_fields($index, $data) {
-        $gallery_ids = $data['gallery_ids'] ?? '';
+        $gallery_ids = (isset($data['gallery_ids']) ? $data['gallery_ids'] : '');
         $ids_array = !empty($gallery_ids) ? explode(',', $gallery_ids) : [];
         ?>
         <table class="form-table">
@@ -579,9 +579,9 @@ class LandingPageBuilder {
                 <th><label>Colonne</label></th>
                 <td>
                     <select class="fp-lp-field" data-field="columns">
-                        <option value="2" <?php selected($data['columns'] ?? '3', '2'); ?>>2</option>
-                        <option value="3" <?php selected($data['columns'] ?? '3', '3'); ?>>3</option>
-                        <option value="4" <?php selected($data['columns'] ?? '3', '4'); ?>>4</option>
+                        <option value="2" <?php selected(isset($data['columns']) ? $data['columns'] : '3', '2'); ?>>2</option>
+                        <option value="3" <?php selected(isset($data['columns']) ? $data['columns'] : '3', '3'); ?>>3</option>
+                        <option value="4" <?php selected(isset($data['columns']) ? $data['columns'] : '3', '4'); ?>>4</option>
                     </select>
                 </td>
             </tr>
@@ -594,14 +594,14 @@ class LandingPageBuilder {
                     <tr>
                         <th><label>Border Radius Immagini (px)</label></th>
                         <td>
-                            <input type="number" class="fp-lp-field" data-field="image_border_radius" value="<?php echo esc_attr($data['image_border_radius'] ?? ''); ?>" placeholder="4" min="0" max="50" style="width: 100%;">
+                            <input type="number" class="fp-lp-field" data-field="image_border_radius" value="<?php echo esc_attr(isset($data['image_border_radius']) ? $data['image_border_radius'] : ''); ?>" placeholder="4" min="0" max="50" style="width: 100%;">
                             <p class="description">Arrotondamento degli angoli delle immagini (0-50px)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Gap tra Immagini (px)</label></th>
                         <td>
-                            <input type="number" class="fp-lp-field" data-field="gap" value="<?php echo esc_attr($data['gap'] ?? ''); ?>" placeholder="10" min="0" max="50" style="width: 100%;">
+                            <input type="number" class="fp-lp-field" data-field="gap" value="<?php echo esc_attr(isset($data['gap']) ? $data['gap'] : ''); ?>" placeholder="10" min="0" max="50" style="width: 100%;">
                             <p class="description">Spaziatura tra le immagini della galleria (0-50px)</p>
                         </td>
                     </tr>
@@ -620,7 +620,7 @@ class LandingPageBuilder {
             <tr>
                 <th><label>Shortcode</label></th>
                 <td>
-                    <textarea class="fp-lp-field" data-field="shortcode" rows="3" style="width: 100%; font-family: monospace;"><?php echo esc_textarea($data['shortcode'] ?? ''); ?></textarea>
+                    <textarea class="fp-lp-field" data-field="shortcode" rows="3" style="width: 100%; font-family: monospace;"><?php echo esc_textarea(isset($data['shortcode']) ? $data['shortcode'] : ''); ?></textarea>
                     <p class="description">Inserisci lo shortcode completo, es: [fp_form id="123"]</p>
                 </td>
             </tr>
@@ -637,22 +637,22 @@ class LandingPageBuilder {
             <tr>
                 <th><label>Testo Pulsante</label></th>
                 <td>
-                    <input type="text" class="fp-lp-field" data-field="button_text" value="<?php echo esc_attr($data['button_text'] ?? ''); ?>" style="width: 100%;">
+                    <input type="text" class="fp-lp-field" data-field="button_text" value="<?php echo esc_attr(isset($data['button_text']) ? $data['button_text'] : ''); ?>" style="width: 100%;">
                 </td>
             </tr>
             <tr>
                 <th><label>URL</label></th>
                 <td>
-                    <input type="url" class="fp-lp-field" data-field="button_url" value="<?php echo esc_attr($data['button_url'] ?? '#'); ?>" style="width: 100%;">
+                    <input type="url" class="fp-lp-field" data-field="button_url" value="<?php echo esc_attr(isset($data['button_url']) ? $data['button_url'] : '#'); ?>" style="width: 100%;">
                 </td>
             </tr>
             <tr>
                 <th><label>Stile</label></th>
                 <td>
                     <select class="fp-lp-field" data-field="style">
-                        <option value="primary" <?php selected($data['style'] ?? 'primary', 'primary'); ?>>Primario</option>
-                        <option value="secondary" <?php selected($data['style'] ?? 'primary', 'secondary'); ?>>Secondario</option>
-                        <option value="outline" <?php selected($data['style'] ?? 'primary', 'outline'); ?>>Outline</option>
+                        <option value="primary" <?php selected(isset($data['style']) ? $data['style'] : 'primary', 'primary'); ?>>Primario</option>
+                        <option value="secondary" <?php selected(isset($data['style']) ? $data['style'] : 'primary', 'secondary'); ?>>Secondario</option>
+                        <option value="outline" <?php selected(isset($data['style']) ? $data['style'] : 'primary', 'outline'); ?>>Outline</option>
                     </select>
                 </td>
             </tr>
@@ -675,21 +675,21 @@ class LandingPageBuilder {
                     <tr>
                         <th><label>Colore Background Pulsante</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="button_bg_color" value="<?php echo esc_attr($data['button_bg_color'] ?? ''); ?>" placeholder="#0073aa" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="button_bg_color" value="<?php echo esc_attr(isset($data['button_bg_color']) ? $data['button_bg_color'] : ''); ?>" placeholder="#0073aa" style="width: 100%;">
                             <p class="description">Colore di sfondo del pulsante (es: #0073aa, #333333)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Colore Testo Pulsante</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="button_text_color" value="<?php echo esc_attr($data['button_text_color'] ?? ''); ?>" placeholder="#ffffff" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="button_text_color" value="<?php echo esc_attr(isset($data['button_text_color']) ? $data['button_text_color'] : ''); ?>" placeholder="#ffffff" style="width: 100%;">
                             <p class="description">Colore del testo del pulsante (es: #ffffff, #000000)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Border Radius (px)</label></th>
                         <td>
-                            <input type="number" class="fp-lp-field" data-field="button_border_radius" value="<?php echo esc_attr($data['button_border_radius'] ?? ''); ?>" placeholder="4" min="0" max="50" style="width: 100%;">
+                            <input type="number" class="fp-lp-field" data-field="button_border_radius" value="<?php echo esc_attr(isset($data['button_border_radius']) ? $data['button_border_radius'] : ''); ?>" placeholder="4" min="0" max="50" style="width: 100%;">
                             <p class="description">Arrotondamento degli angoli (es: 4 per angoli leggermente arrotondati, 50 per completamente rotondo)</p>
                         </td>
                     </tr>
@@ -705,10 +705,10 @@ class LandingPageBuilder {
                         <th><label>Allineamento Mobile</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_mobile">
-                                <option value="" <?php selected($data['align_mobile'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_mobile'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_mobile'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_mobile'] ?? '', 'right'); ?>>Destra</option>
+                                <option value="" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'right'); ?>>Destra</option>
                             </select>
                         </td>
                     </tr>
@@ -716,10 +716,10 @@ class LandingPageBuilder {
                         <th><label>Allineamento Tablet</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_tablet">
-                                <option value="" <?php selected($data['align_tablet'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_tablet'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_tablet'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_tablet'] ?? '', 'right'); ?>>Destra</option>
+                                <option value="" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'right'); ?>>Destra</option>
                             </select>
                         </td>
                     </tr>
@@ -727,10 +727,10 @@ class LandingPageBuilder {
                         <th><label>Allineamento Desktop</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_desktop">
-                                <option value="" <?php selected($data['align_desktop'] ?? '', ''); ?>>Usa allineamento generale</option>
-                                <option value="left" <?php selected($data['align_desktop'] ?? '', 'left'); ?>>Sinistra</option>
-                                <option value="center" <?php selected($data['align_desktop'] ?? '', 'center'); ?>>Centro</option>
-                                <option value="right" <?php selected($data['align_desktop'] ?? '', 'right'); ?>>Destra</option>
+                                <option value="" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="left" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'left'); ?>>Sinistra</option>
+                                <option value="center" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'center'); ?>>Centro</option>
+                                <option value="right" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'right'); ?>>Destra</option>
                             </select>
                         </td>
                     </tr>
@@ -749,7 +749,7 @@ class LandingPageBuilder {
             <tr>
                 <th><label>URL Video (YouTube/Vimeo)</label></th>
                 <td>
-                    <input type="url" class="fp-lp-field" data-field="video_url" value="<?php echo esc_attr($data['video_url'] ?? ''); ?>" style="width: 100%;" placeholder="https://youtube.com/watch?v=...">
+                    <input type="url" class="fp-lp-field" data-field="video_url" value="<?php echo esc_attr(isset($data['video_url']) ? $data['video_url'] : ''); ?>" style="width: 100%;" placeholder="https://youtube.com/watch?v=...">
                     <p class="description">Incolla l'URL completo di YouTube o Vimeo</p>
                 </td>
             </tr>
@@ -777,17 +777,17 @@ class LandingPageBuilder {
                 <th><label>Stile</label></th>
                 <td>
                     <select class="fp-lp-field" data-field="style">
-                        <option value="solid" <?php selected($data['style'] ?? 'solid', 'solid'); ?>>Linea Solida</option>
-                        <option value="dashed" <?php selected($data['style'] ?? 'solid', 'dashed'); ?>>Linea Tratteggiata</option>
-                        <option value="dotted" <?php selected($data['style'] ?? 'solid', 'dotted'); ?>>Linea Puntinata</option>
-                        <option value="space" <?php selected($data['style'] ?? 'solid', 'space'); ?>>Spazio</option>
+                        <option value="solid" <?php selected(isset($data['style']) ? $data['style'] : 'solid', 'solid'); ?>>Linea Solida</option>
+                        <option value="dashed" <?php selected(isset($data['style']) ? $data['style'] : 'solid', 'dashed'); ?>>Linea Tratteggiata</option>
+                        <option value="dotted" <?php selected(isset($data['style']) ? $data['style'] : 'solid', 'dotted'); ?>>Linea Puntinata</option>
+                        <option value="space" <?php selected(isset($data['style']) ? $data['style'] : 'solid', 'space'); ?>>Spazio</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <th><label>Altezza (px)</label></th>
                 <td>
-                    <input type="number" class="fp-lp-field" data-field="height" value="<?php echo esc_attr($data['height'] ?? '40'); ?>" min="10" max="200" step="10">
+                    <input type="number" class="fp-lp-field" data-field="height" value="<?php echo esc_attr(isset($data['height']) ? $data['height'] : '40'); ?>" min="10" max="200" step="10">
                 </td>
             </tr>
         </table>
@@ -836,13 +836,13 @@ class LandingPageBuilder {
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Titolo</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-feature-field" data-field="title" data-feature-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($feature['title'] ?? ''); ?>" style="width: 100%;" placeholder="Titolo feature">
+                                            <input type="text" class="fp-lp-feature-field" data-field="title" data-feature-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($feature['title']) ? $feature['title'] : ''); ?>" style="width: 100%;" placeholder="Titolo feature">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Testo</label></td>
                                         <td style="padding: 5px 0;">
-                                            <textarea class="fp-lp-feature-field" data-field="text" data-feature-index="<?php echo esc_attr($i); ?>" rows="3" style="width: 100%;" placeholder="Descrizione feature"><?php echo esc_textarea($feature['text'] ?? ''); ?></textarea>
+                                            <textarea class="fp-lp-feature-field" data-field="text" data-feature-index="<?php echo esc_attr($i); ?>" rows="3" style="width: 100%;" placeholder="Descrizione feature"><?php echo esc_textarea(isset($feature['text']) ? $feature['text'] : ''); ?></textarea>
                                         </td>
                                     </tr>
                                 </table>
@@ -861,7 +861,7 @@ class LandingPageBuilder {
      */
     private function render_counters_fields($index, $data) {
         $counters = isset($data['counters']) ? $data['counters'] : [];
-        $columns = $data['columns'] ?? '4';
+        $columns = (isset($data['columns']) ? $data['columns'] : '4');
         if (empty($counters)) {
             $counters = [['number' => '', 'label' => '', 'prefix' => '', 'suffix' => '', 'icon' => '']];
         }
@@ -891,31 +891,31 @@ class LandingPageBuilder {
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Icona (classe CSS, opzionale)</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-counter-field" data-field="icon" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['icon'] ?? ''); ?>" style="width: 100%;" placeholder="fa fa-users">
+                                            <input type="text" class="fp-lp-counter-field" data-field="icon" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($counter['icon']) ? $counter['icon'] : ''); ?>" style="width: 100%;" placeholder="fa fa-users">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Numero</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-counter-field" data-field="number" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['number'] ?? ''); ?>" style="width: 100%;" placeholder="1000">
+                                            <input type="text" class="fp-lp-counter-field" data-field="number" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($counter['number']) ? $counter['number'] : ''); ?>" style="width: 100%;" placeholder="1000">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Etichetta</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-counter-field" data-field="label" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['label'] ?? ''); ?>" style="width: 100%;" placeholder="Clienti Soddisfatti">
+                                            <input type="text" class="fp-lp-counter-field" data-field="label" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($counter['label']) ? $counter['label'] : ''); ?>" style="width: 100%;" placeholder="Clienti Soddisfatti">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Prefisso (opzionale)</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-counter-field" data-field="prefix" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['prefix'] ?? ''); ?>" style="width: 100%;" placeholder="€">
+                                            <input type="text" class="fp-lp-counter-field" data-field="prefix" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($counter['prefix']) ? $counter['prefix'] : ''); ?>" style="width: 100%;" placeholder="€">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Suffisso (opzionale)</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-counter-field" data-field="suffix" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['suffix'] ?? ''); ?>" style="width: 100%;" placeholder="+">
+                                            <input type="text" class="fp-lp-counter-field" data-field="suffix" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($counter['suffix']) ? $counter['suffix'] : ''); ?>" style="width: 100%;" placeholder="+">
                                         </td>
                                     </tr>
                                 </table>
@@ -953,13 +953,13 @@ class LandingPageBuilder {
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Domanda</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-faq-field" data-field="question" data-faq-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($faq['question'] ?? ''); ?>" style="width: 100%;" placeholder="La domanda frequente">
+                                            <input type="text" class="fp-lp-faq-field" data-field="question" data-faq-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($faq['question']) ? $faq['question'] : ''); ?>" style="width: 100%;" placeholder="La domanda frequente">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Risposta</label></td>
                                         <td style="padding: 5px 0;">
-                                            <textarea class="fp-lp-faq-field" data-field="answer" data-faq-index="<?php echo esc_attr($i); ?>" rows="4" style="width: 100%;" placeholder="La risposta alla domanda"><?php echo esc_textarea($faq['answer'] ?? ''); ?></textarea>
+                                            <textarea class="fp-lp-faq-field" data-field="answer" data-faq-index="<?php echo esc_attr($i); ?>" rows="4" style="width: 100%;" placeholder="La risposta alla domanda"><?php echo esc_textarea(isset($faq['answer']) ? $faq['answer'] : ''); ?></textarea>
                                         </td>
                                     </tr>
                                 </table>
@@ -997,13 +997,13 @@ class LandingPageBuilder {
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Titolo Tab</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-tab-field" data-field="title" data-tab-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($tab['title'] ?? ''); ?>" style="width: 100%;" placeholder="Nome Tab">
+                                            <input type="text" class="fp-lp-tab-field" data-field="title" data-tab-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($tab['title']) ? $tab['title'] : ''); ?>" style="width: 100%;" placeholder="Nome Tab">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding: 5px 0;"><label>Contenuto</label></td>
                                         <td style="padding: 5px 0;">
-                                            <textarea class="fp-lp-tab-field" data-field="content" data-tab-index="<?php echo esc_attr($i); ?>" rows="6" style="width: 100%;" placeholder="Contenuto del tab"><?php echo esc_textarea($tab['content'] ?? ''); ?></textarea>
+                                            <textarea class="fp-lp-tab-field" data-field="content" data-tab-index="<?php echo esc_attr($i); ?>" rows="6" style="width: 100%;" placeholder="Contenuto del tab"><?php echo esc_textarea(isset($tab['content']) ? $tab['content'] : ''); ?></textarea>
                                             <p class="description">HTML consentito</p>
                                         </td>
                                     </tr>
@@ -1030,35 +1030,35 @@ class LandingPageBuilder {
                     <tr>
                         <th><label>Colore Background</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="bg_color" value="<?php echo esc_attr($data['bg_color'] ?? ''); ?>" placeholder="#ffffff o trasparente" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="bg_color" value="<?php echo esc_attr(isset($data['bg_color']) ? $data['bg_color'] : ''); ?>" placeholder="#ffffff o trasparente" style="width: 100%;">
                             <p class="description">Colore di sfondo della sezione (es: #ffffff, #f5f5f5, trasparente)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Padding (px)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="padding" value="<?php echo esc_attr($data['padding'] ?? ''); ?>" placeholder="20px" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="padding" value="<?php echo esc_attr(isset($data['padding']) ? $data['padding'] : ''); ?>" placeholder="20px" style="width: 100%;">
                             <p class="description">Spaziatura interna (es: "20px" o "20px 10px" per top-bottom left-right)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Margin (px)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="margin" value="<?php echo esc_attr($data['margin'] ?? ''); ?>" placeholder="20px" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="margin" value="<?php echo esc_attr(isset($data['margin']) ? $data['margin'] : ''); ?>" placeholder="20px" style="width: 100%;">
                             <p class="description">Spaziatura esterna (es: "20px" o "20px 10px")</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Classe CSS Personalizzata</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="css_class" value="<?php echo esc_attr($data['css_class'] ?? ''); ?>" placeholder="mia-classe" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="css_class" value="<?php echo esc_attr(isset($data['css_class']) ? $data['css_class'] : ''); ?>" placeholder="mia-classe" style="width: 100%;">
                             <p class="description">Aggiungi una classe CSS personalizzata (senza punto)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>ID HTML Personalizzato</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="css_id" value="<?php echo esc_attr($data['css_id'] ?? ''); ?>" placeholder="mio-id" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="css_id" value="<?php echo esc_attr(isset($data['css_id']) ? $data['css_id'] : ''); ?>" placeholder="mio-id" style="width: 100%;">
                             <p class="description">Aggiungi un ID HTML personalizzato (senza #)</p>
                         </td>
                     </tr>
@@ -1073,42 +1073,42 @@ class LandingPageBuilder {
                     <tr>
                         <th><label>Padding Mobile (px)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="padding_mobile" value="<?php echo esc_attr($data['padding_mobile'] ?? ''); ?>" placeholder="10px" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="padding_mobile" value="<?php echo esc_attr(isset($data['padding_mobile']) ? $data['padding_mobile'] : ''); ?>" placeholder="10px" style="width: 100%;">
                             <p class="description">Spaziatura interna su dispositivi mobile (&lt;768px)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Padding Tablet (px)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="padding_tablet" value="<?php echo esc_attr($data['padding_tablet'] ?? ''); ?>" placeholder="15px" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="padding_tablet" value="<?php echo esc_attr(isset($data['padding_tablet']) ? $data['padding_tablet'] : ''); ?>" placeholder="15px" style="width: 100%;">
                             <p class="description">Spaziatura interna su tablet (768px-1024px)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Padding Desktop (px)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="padding_desktop" value="<?php echo esc_attr($data['padding_desktop'] ?? ''); ?>" placeholder="20px" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="padding_desktop" value="<?php echo esc_attr(isset($data['padding_desktop']) ? $data['padding_desktop'] : ''); ?>" placeholder="20px" style="width: 100%;">
                             <p class="description">Spaziatura interna su desktop (&gt;1024px)</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Margin Mobile (px)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="margin_mobile" value="<?php echo esc_attr($data['margin_mobile'] ?? ''); ?>" placeholder="10px" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="margin_mobile" value="<?php echo esc_attr(isset($data['margin_mobile']) ? $data['margin_mobile'] : ''); ?>" placeholder="10px" style="width: 100%;">
                             <p class="description">Spaziatura esterna su dispositivi mobile</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Margin Tablet (px)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="margin_tablet" value="<?php echo esc_attr($data['margin_tablet'] ?? ''); ?>" placeholder="15px" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="margin_tablet" value="<?php echo esc_attr(isset($data['margin_tablet']) ? $data['margin_tablet'] : ''); ?>" placeholder="15px" style="width: 100%;">
                             <p class="description">Spaziatura esterna su tablet</p>
                         </td>
                     </tr>
                     <tr>
                         <th><label>Margin Desktop (px)</label></th>
                         <td>
-                            <input type="text" class="fp-lp-field" data-field="margin_desktop" value="<?php echo esc_attr($data['margin_desktop'] ?? ''); ?>" placeholder="20px" style="width: 100%;">
+                            <input type="text" class="fp-lp-field" data-field="margin_desktop" value="<?php echo esc_attr(isset($data['margin_desktop']) ? $data['margin_desktop'] : ''); ?>" placeholder="20px" style="width: 100%;">
                             <p class="description">Spaziatura esterna su desktop</p>
                         </td>
                     </tr>
@@ -1120,15 +1120,15 @@ class LandingPageBuilder {
                 <th><label>Visibilità</label></th>
                 <td>
                     <label style="margin-right: 15px;">
-                        <input type="checkbox" class="fp-lp-field" data-field="hide_mobile" value="1" <?php checked($data['hide_mobile'] ?? '', '1'); ?>>
+                        <input type="checkbox" class="fp-lp-field" data-field="hide_mobile" value="1" <?php checked((isset($data['hide_mobile']) ? $data['hide_mobile'] : ''), '1'); ?>>
                         Nascondi su Mobile
                     </label>
                     <label style="margin-right: 15px;">
-                        <input type="checkbox" class="fp-lp-field" data-field="hide_tablet" value="1" <?php checked($data['hide_tablet'] ?? '', '1'); ?>>
+                        <input type="checkbox" class="fp-lp-field" data-field="hide_tablet" value="1" <?php checked((isset($data['hide_tablet']) ? $data['hide_tablet'] : ''), '1'); ?>>
                         Nascondi su Tablet
                     </label>
                     <label>
-                        <input type="checkbox" class="fp-lp-field" data-field="hide_desktop" value="1" <?php checked($data['hide_desktop'] ?? '', '1'); ?>>
+                        <input type="checkbox" class="fp-lp-field" data-field="hide_desktop" value="1" <?php checked((isset($data['hide_desktop']) ? $data['hide_desktop'] : ''), '1'); ?>>
                         Nascondi su Desktop
                     </label>
                 </td>
@@ -1331,7 +1331,7 @@ class LandingPageBuilder {
     public function ajax_get_image() {
         check_ajax_referer('fp_landing_page_builder', 'nonce');
         
-        $image_id = absint($_POST['image_id'] ?? 0);
+        $image_id = absint(isset($_POST['image_id']) ? $_POST['image_id'] : 0);
         if ($image_id) {
             $url = wp_get_attachment_image_url($image_id, 'medium');
             if ($url) {
@@ -1348,7 +1348,7 @@ class LandingPageBuilder {
     public function ajax_get_gallery() {
         check_ajax_referer('fp_landing_page_builder', 'nonce');
         
-        $gallery_ids = sanitize_text_field($_POST['gallery_ids'] ?? '');
+        $gallery_ids = sanitize_text_field(isset($_POST['gallery_ids']) ? $_POST['gallery_ids'] : '');
         if ($gallery_ids) {
             $ids = array_filter(array_map('absint', explode(',', $gallery_ids)));
             $images = [];
