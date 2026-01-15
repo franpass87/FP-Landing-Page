@@ -1422,7 +1422,9 @@
         });
         
         builder.init();
-        builder.initIconPicker();
+        
+        // Inizializza Icon Picker
+        iconPicker.init();
     });
     
     // Icon Picker
@@ -1453,7 +1455,7 @@
             });
             
             // Cerca icone
-            $('#fp-lp-icon-search-input').on('input', function() {
+            $(document).on('input', '#fp-lp-icon-search-input', function() {
                 const search = $(this).val().toLowerCase();
                 self.filterIcons(search);
             });
@@ -1467,7 +1469,7 @@
             });
             
             // Conferma selezione
-            $('#fp-lp-icon-picker-select').on('click', function() {
+            $(document).on('click', '#fp-lp-icon-picker-select', function() {
                 if (self.selectedIcon && self.currentTarget) {
                     self.currentTarget.val(self.selectedIcon).trigger('change');
                     self.closeModal();
@@ -1475,7 +1477,7 @@
             });
             
             // Annulla/Chiudi
-            $('#fp-lp-icon-picker-cancel, .fp-lp-icon-modal-close, .fp-lp-icon-modal-overlay').on('click', function() {
+            $(document).on('click', '#fp-lp-icon-picker-cancel, .fp-lp-icon-modal-close, .fp-lp-icon-modal-overlay', function() {
                 self.closeModal();
             });
             
@@ -1529,12 +1531,5 @@
             });
         }
     };
-    
-    // Inizializza icon picker quando il DOM è pronto
-    if (typeof jQuery !== 'undefined') {
-        jQuery(document).ready(function($) {
-            iconPicker.init();
-        });
-    }
     
 })(jQuery);
