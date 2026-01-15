@@ -1,0 +1,30 @@
+{
+  "name": "fp/landing-page",
+  "description": "Plugin WordPress per la gestione e creazione di landing page personalizzate",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "version": "1.0.0",
+  "homepage": "https://francescopasseri.com",
+  "authors": [
+    {
+      "name": "Francesco Passeri",
+      "email": "info@francescopasseri.com",
+      "homepage": "https://francescopasseri.com"
+    }
+  ],
+  "support": {
+    "email": "info@francescopasseri.com"
+  },
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "FPLandingPage\\": "src/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}
