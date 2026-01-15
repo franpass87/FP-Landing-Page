@@ -3,7 +3,7 @@
  * Plugin Name: FP Landing Page
  * Plugin URI: https://francescopasseri.com/plugins/fp-landing-page
  * Description: Plugin per la gestione e creazione di landing page personalizzate
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Francesco Passeri
  * Author URI: https://francescopasseri.com
  * Text Domain: fp-landing-page
