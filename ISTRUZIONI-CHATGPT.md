@@ -170,7 +170,8 @@ Il formato JSON deve seguire questa struttura:
   "type": "separator",
   "data": {
     "style": "solid",
-    "height": 40
+    "height": 40,
+    "color": "#e0e0e0"
   }
 }
 ```
@@ -178,6 +179,7 @@ Il formato JSON deve seguire questa struttura:
 **Parametri disponibili:**
 - `style` (stringa): `solid`, `dashed`, `dotted`, `space` (default: `solid`)
 - `height` (numero): Altezza in pixel (default: `40`)
+- `color` (stringa): Colore hex del bordo per linee (es: `#e0e0e0`) - Non applicabile allo stile `space`
 
 ---
 
@@ -187,11 +189,15 @@ Il formato JSON deve seguire questa struttura:
   "type": "features",
   "data": {
     "columns": 3,
+    "icon_color": "#0073aa",
+    "title_color": "#1d2327",
+    "text_color": "#666",
     "features": [
       {
         "icon": "fa fa-star",
         "title": "Feature 1",
-        "text": "Descrizione della prima feature con dettagli."
+        "text": "Descrizione della prima feature con dettagli.",
+        "icon_color": "#ff6b6b"
       },
       {
         "icon": "fa fa-rocket",
@@ -210,10 +216,14 @@ Il formato JSON deve seguire questa struttura:
 
 **Parametri disponibili:**
 - `columns` (numero): `1`, `2`, `3`, `4` (default: `3`) - Numero di colonne della griglia
+- `icon_color` (stringa, opzionale): Colore hex per tutte le icone della sezione (es: `#0073aa`)
+- `title_color` (stringa, opzionale): Colore hex per i titoli delle features (es: `#1d2327`)
+- `text_color` (stringa, opzionale): Colore hex per il testo descrittivo (es: `#666`)
 - `features` (array, obbligatorio): Array di oggetti feature
-  - `icon` (stringa): Classe CSS icona (es: Font Awesome)
+  - `icon` (stringa): Classe CSS icona Font Awesome (es: `fa fa-star`)
   - `title` (stringa): Titolo feature
   - `text` (stringa): Descrizione feature (HTML consentito)
+  - `icon_color` (stringa, opzionale): Colore hex per l'icona di questa feature specifica (sovrascrive il colore globale)
 
 ---
 
@@ -223,13 +233,17 @@ Il formato JSON deve seguire questa struttura:
   "type": "counters",
   "data": {
     "columns": 4,
+    "icon_color": "#0073aa",
+    "number_color": "#1d2327",
+    "label_color": "#50575e",
     "counters": [
       {
         "icon": "fa fa-users",
-        "number": "1000+",
+        "number": "1000",
         "label": "Clienti Soddisfatti",
         "prefix": "",
-        "suffix": "+"
+        "suffix": "+",
+        "icon_color": "#ff6b6b"
       },
       {
         "number": "500",
@@ -244,12 +258,16 @@ Il formato JSON deve seguire questa struttura:
 
 **Parametri disponibili:**
 - `columns` (numero): `1`, `2`, `3`, `4` (default: `4`) - Numero di colonne della griglia
+- `icon_color` (stringa, opzionale): Colore hex per tutte le icone della sezione (es: `#0073aa`)
+- `number_color` (stringa, opzionale): Colore hex per i numeri (es: `#1d2327`) - Include anche prefix e suffix
+- `label_color` (stringa, opzionale): Colore hex per le etichette (es: `#50575e`)
 - `counters` (array, obbligatorio): Array di oggetti contatore
-  - `icon` (stringa, opzionale): Classe CSS icona
+  - `icon` (stringa, opzionale): Classe CSS icona Font Awesome (es: `fa fa-users`)
   - `number` (stringa): Numero da visualizzare
   - `label` (stringa): Etichetta
   - `prefix` (stringa, opzionale): Prefisso (es: `€`, `$`)
   - `suffix` (stringa, opzionale): Suffisso (es: `+`, `%`)
+  - `icon_color` (stringa, opzionale): Colore hex per l'icona di questo contatore specifico (sovrascrive il colore globale)
 
 ---
 
@@ -258,6 +276,10 @@ Il formato JSON deve seguire questa struttura:
 {
   "type": "faq",
   "data": {
+    "icon_color": "#333",
+    "question_color": "#1d2327",
+    "answer_color": "#555",
+    "bg_color": "#f8f8f8",
     "faqs": [
       {
         "question": "Qual è la prima domanda?",
@@ -273,6 +295,10 @@ Il formato JSON deve seguire questa struttura:
 ```
 
 **Parametri disponibili:**
+- `icon_color` (stringa, opzionale): Colore hex per l'icona "+" di espansione (es: `#333`)
+- `question_color` (stringa, opzionale): Colore hex per il testo delle domande (es: `#1d2327`)
+- `answer_color` (stringa, opzionale): Colore hex per il testo delle risposte (es: `#555`)
+- `bg_color` (stringa, opzionale): Colore hex per lo sfondo delle domande (es: `#f8f8f8`)
 - `faqs` (array, obbligatorio): Array di oggetti FAQ
   - `question` (stringa): Domanda
   - `answer` (stringa): Risposta (HTML consentito)
@@ -284,6 +310,11 @@ Il formato JSON deve seguire questa struttura:
 {
   "type": "tabs",
   "data": {
+    "text_color": "#666",
+    "active_bg_color": "#0073aa",
+    "active_text_color": "#0073aa",
+    "border_color": "#e0e0e0",
+    "content_color": "#555",
     "tabs": [
       {
         "title": "Tab 1",
@@ -299,6 +330,11 @@ Il formato JSON deve seguire questa struttura:
 ```
 
 **Parametri disponibili:**
+- `text_color` (stringa, opzionale): Colore hex per il testo dei tab inattivi (es: `#666`)
+- `active_bg_color` (stringa, opzionale): Colore hex per lo sfondo del tab attivo (es: `#0073aa`)
+- `active_text_color` (stringa, opzionale): Colore hex per il testo del tab attivo (es: `#0073aa`)
+- `border_color` (stringa, opzionale): Colore hex per il bordo inferiore dei tab (es: `#e0e0e0`)
+- `content_color` (stringa, opzionale): Colore hex per il contenuto dei tab (es: `#555`)
 - `tabs` (array, obbligatorio): Array di oggetti tab
   - `title` (stringa): Titolo tab
   - `content` (stringa): Contenuto tab (HTML consentito)
@@ -427,14 +463,18 @@ Le impostazioni globali della landing page:
     {
       "type": "separator",
       "data": {
-        "style": "space",
-        "height": 60
+        "style": "solid",
+        "height": 60,
+        "color": "#e0e0e0"
       }
     },
     {
       "type": "features",
       "data": {
         "columns": 3,
+        "icon_color": "#0073aa",
+        "title_color": "#1d2327",
+        "text_color": "#666",
         "features": [
           {
             "icon": "fa fa-rocket",
@@ -532,8 +572,25 @@ Quando generi una landing page JSON, verifica:
 
 ---
 
+## 🎨 Personalizzazione Colori
+
+Il plugin supporta una personalizzazione completa dei colori per tutte le sezioni:
+
+- **Title**: `text_color` (colore del testo)
+- **CTA**: `button_bg_color`, `button_text_color` (colori pulsante)
+- **Separator**: `color` (colore del bordo, solo per linee)
+- **Features**: `icon_color` (globale e individuale), `title_color`, `text_color`
+- **Counters**: `icon_color` (globale e individuale), `number_color`, `label_color`
+- **FAQ**: `icon_color`, `question_color`, `answer_color`, `bg_color`
+- **Tabs**: `text_color`, `active_bg_color`, `active_text_color`, `border_color`, `content_color`
+
+Tutti i colori sono opzionali e utilizzano il formato hex (es: `#0073aa`, `#ffffff`). Se non specificati, vengono utilizzati i valori di default del plugin.
+
+---
+
 ## 🔗 Risorse
 
-- **Plugin:** FP Landing Page v1.0.1
+- **Plugin:** FP Landing Page v1.0.4
 - **Tipi sezioni supportati:** 12 (title, text, image, gallery, cta, video, separator, features, counters, faq, tabs, shortcode)
 - **Formato:** JSON standard UTF-8
+- **Personalizzazione colori:** Completa per tutte le sezioni con elementi colorabili
