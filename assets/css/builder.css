@@ -3,6 +3,202 @@
  * Interfaccia moderna e professionale
  */
 
+/* Icon Picker Modal */
+#fp-lp-icon-picker-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fp-lp-icon-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.fp-lp-icon-modal-content {
+    position: relative;
+    background: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 100001;
+}
+
+.fp-lp-icon-modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fp-lp-icon-modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.fp-lp-icon-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fp-lp-icon-modal-close:hover {
+    color: #000;
+}
+
+.fp-lp-icon-modal-body {
+    padding: 20px;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.fp-lp-icon-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+.fp-lp-icon-tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: -2px;
+    transition: all 0.3s;
+}
+
+.fp-lp-icon-tab:hover {
+    color: #0073aa;
+}
+
+.fp-lp-icon-tab.active {
+    color: #0073aa;
+    border-bottom-color: #0073aa;
+}
+
+.fp-lp-icons-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.fp-lp-icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 5px;
+    border: 2px solid #e0e0e0;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    min-height: 80px;
+}
+
+.fp-lp-icon-item:hover {
+    border-color: #0073aa;
+    background: #f0f7ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 115, 170, 0.2);
+}
+
+.fp-lp-icon-item.selected {
+    border-color: #0073aa;
+    background: #0073aa;
+    color: #fff;
+}
+
+.fp-lp-icon-item.selected i {
+    color: #fff !important;
+}
+
+.fp-lp-icon-item i {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.fp-lp-icon-item span {
+    font-size: 10px;
+    display: block;
+    margin-top: 5px;
+    word-break: break-all;
+    line-height: 1.2;
+    color: #666;
+}
+
+.fp-lp-icon-item.selected span {
+    color: #fff;
+}
+
+.fp-lp-icon-modal-footer {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.fp-lp-icon-picker-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Responsive Icon Grid */
+@media (max-width: 1200px) {
+    .fp-lp-icons-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .fp-lp-icons-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .fp-lp-icon-modal-content {
+        width: 95%;
+    }
+}
+
 .fp-lp-builder-container {
     padding: 20px 0;
 }

@@ -29,6 +29,7 @@ class LandingPageBuilder {
         add_action('admin_enqueue_scripts', [$this, 'enqueue_builder_scripts']);
         add_action('wp_ajax_fp_lp_get_image', [$this, 'ajax_get_image']);
         add_action('wp_ajax_fp_lp_get_gallery', [$this, 'ajax_get_gallery']);
+        add_action('admin_footer', [$this, 'render_icon_picker_modal']);
     }
 
     /**
@@ -834,10 +835,15 @@ class LandingPageBuilder {
                                 </div>
                                 <table style="width: 100%;">
                                     <tr>
-                                        <td style="padding: 5px 0;"><label>Icona (classe CSS, es: fa fa-star)</label></td>
+                                        <td style="padding: 5px 0;"><label>Icona</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-feature-field" data-field="icon" data-feature-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr((isset($feature['icon']) ? $feature['icon'] : '')); ?>" style="width: 100%;" placeholder="fa fa-star">
-                                            <p class="description">Usa classi Font Awesome o altre librerie di icone</p>
+                                            <div style="display: flex; gap: 5px; align-items: center;">
+                                                <input type="text" class="fp-lp-feature-field fp-lp-icon-input" data-field="icon" data-feature-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr((isset($feature['icon']) ? $feature['icon'] : '')); ?>" style="flex: 1;" placeholder="fa fa-star">
+                                                <button type="button" class="button fp-lp-icon-picker-btn" data-target-input=".fp-lp-feature-field[data-feature-index='<?php echo esc_attr($i); ?>'][data-field='icon']">
+                                                    <span class="dashicons dashicons-admin-appearance"></span> Scegli Icona
+                                                </button>
+                                            </div>
+                                            <p class="description">Seleziona un'icona dalla libreria o inserisci manualmente la classe CSS</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -910,9 +916,14 @@ class LandingPageBuilder {
                                 </div>
                                 <table style="width: 100%;">
                                     <tr>
-                                        <td style="padding: 5px 0;"><label>Icona (classe CSS, opzionale)</label></td>
+                                        <td style="padding: 5px 0;"><label>Icona (opzionale)</label></td>
                                         <td style="padding: 5px 0;">
-                                            <input type="text" class="fp-lp-counter-field" data-field="icon" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['icon'] ?? ''); ?>" style="width: 100%;" placeholder="fa fa-users">
+                                            <div style="display: flex; gap: 5px; align-items: center;">
+                                                <input type="text" class="fp-lp-counter-field fp-lp-icon-input" data-field="icon" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['icon'] ?? ''); ?>" style="flex: 1;" placeholder="fa fa-users">
+                                                <button type="button" class="button fp-lp-icon-picker-btn" data-target-input=".fp-lp-counter-field[data-counter-index='<?php echo esc_attr($i); ?>'][data-field='icon']">
+                                                    <span class="dashicons dashicons-admin-appearance"></span> Scegli
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1450,5 +1461,124 @@ class LandingPageBuilder {
         }
         
         wp_send_json_error();
+    }
+    
+    /**
+     * Renderizza il modal per il selettore di icone
+     */
+    public function render_icon_picker_modal() {
+        global $typenow, $pagenow;
+        
+        if ($typenow !== 'fp_landing_page' || $pagenow !== 'post.php') {
+            return;
+        }
+        
+        // Lista icone Font Awesome comuni
+        $icons = [
+            'fa-solid' => [
+                'fa-star', 'fa-heart', 'fa-check', 'fa-times', 'fa-plus', 'fa-minus',
+                'fa-user', 'fa-users', 'fa-user-circle', 'fa-envelope', 'fa-phone',
+                'fa-home', 'fa-building', 'fa-globe', 'fa-map-marker-alt', 'fa-calendar',
+                'fa-clock', 'fa-clock-four', 'fa-bell', 'fa-bell-slash', 'fa-cog',
+                'fa-cogs', 'fa-wrench', 'fa-tools', 'fa-lock', 'fa-unlock',
+                'fa-shield-alt', 'fa-shield', 'fa-key', 'fa-credit-card', 'fa-wallet',
+                'fa-rocket', 'fa-plane', 'fa-car', 'fa-train', 'fa-ship',
+                'fa-shopping-cart', 'fa-shopping-bag', 'fa-box', 'fa-gift', 'fa-tag',
+                'fa-tags', 'fa-percent', 'fa-dollar-sign', 'fa-euro-sign', 'fa-pound-sign',
+                'fa-chart-line', 'fa-chart-bar', 'fa-chart-pie', 'fa-trophy', 'fa-medal',
+                'fa-award', 'fa-certificate', 'fa-graduation-cap', 'fa-book', 'fa-books',
+                'fa-file', 'fa-folder', 'fa-folder-open', 'fa-image', 'fa-images',
+                'fa-video', 'fa-camera', 'fa-music', 'fa-film', 'fa-play',
+                'fa-pause', 'fa-stop', 'fa-forward', 'fa-backward', 'fa-headphones',
+                'fa-microphone', 'fa-volume-up', 'fa-volume-down', 'fa-volume-off',
+                'fa-wifi', 'fa-signal', 'fa-bluetooth', 'fa-battery-full', 'fa-bolt',
+                'fa-lightbulb', 'fa-fire', 'fa-sun', 'fa-moon', 'fa-cloud',
+                'fa-umbrella', 'fa-snowflake', 'fa-leaf', 'fa-tree', 'fa-flower',
+                'fa-hands-helping', 'fa-handshake', 'fa-thumbs-up', 'fa-thumbs-down',
+                'fa-smile', 'fa-laugh', 'fa-meh', 'fa-frown', 'fa-angry',
+                'fa-comments', 'fa-comment', 'fa-comment-dots', 'fa-question-circle',
+                'fa-info-circle', 'fa-exclamation-circle', 'fa-exclamation-triangle',
+                'fa-search', 'fa-search-plus', 'fa-search-minus', 'fa-filter',
+                'fa-sort', 'fa-sort-up', 'fa-sort-down', 'fa-arrows-alt', 'fa-expand',
+                'fa-compress', 'fa-arrows-alt-v', 'fa-arrows-alt-h', 'fa-redo', 'fa-undo',
+                'fa-sync', 'fa-sync-alt', 'fa-refresh', 'fa-download', 'fa-upload',
+                'fa-link', 'fa-unlink', 'fa-share', 'fa-share-alt', 'fa-reply',
+                'fa-reply-all', 'fa-forward', 'fa-paper-plane', 'fa-envelope-open',
+                'fa-inbox', 'fa-trash', 'fa-trash-alt', 'fa-archive', 'fa-file-archive',
+                'fa-save', 'fa-save-alt', 'fa-edit', 'fa-pencil-alt', 'fa-pen',
+                'fa-copy', 'fa-cut', 'fa-paste', 'fa-clone', 'fa-print',
+                'fa-mouse-pointer', 'fa-hand-pointer', 'fa-eye', 'fa-eye-slash',
+                'fa-fingerprint', 'fa-qrcode', 'fa-barcode', 'fa-database', 'fa-server',
+                'fa-hdd', 'fa-memory', 'fa-microchip', 'fa-laptop', 'fa-desktop',
+                'fa-tablet-alt', 'fa-mobile-alt', 'fa-keyboard', 'fa-mouse',
+            ],
+            'fa-regular' => [
+                'fa-star', 'fa-heart', 'fa-user', 'fa-comment', 'fa-image',
+                'fa-file', 'fa-folder', 'fa-clock', 'fa-calendar', 'fa-envelope',
+                'fa-circle', 'fa-square', 'fa-check-circle', 'fa-times-circle',
+            ],
+            'fa-brands' => [
+                'fa-facebook', 'fa-twitter', 'fa-instagram', 'fa-linkedin', 'fa-youtube',
+                'fa-github', 'fa-gitlab', 'fa-wordpress', 'fa-google', 'fa-apple',
+                'fa-microsoft', 'fa-amazon', 'fa-paypal', 'fa-stripe', 'fa-cc-visa',
+                'fa-cc-mastercard', 'fa-cc-amex', 'fa-cc-paypal',
+            ]
+        ];
+        
+        ?>
+        <div id="fp-lp-icon-picker-modal" style="display: none;">
+            <div class="fp-lp-icon-modal-overlay"></div>
+            <div class="fp-lp-icon-modal-content">
+                <div class="fp-lp-icon-modal-header">
+                    <h2><?php _e('Seleziona Icona', 'fp-landing-page'); ?></h2>
+                    <button type="button" class="fp-lp-icon-modal-close" aria-label="<?php esc_attr_e('Chiudi', 'fp-landing-page'); ?>">
+                        <span class="dashicons dashicons-no-alt"></span>
+                    </button>
+                </div>
+                <div class="fp-lp-icon-modal-body">
+                    <div class="fp-lp-icon-search">
+                        <input type="text" id="fp-lp-icon-search-input" placeholder="<?php esc_attr_e('Cerca icona...', 'fp-landing-page'); ?>" style="width: 100%; padding: 8px; margin-bottom: 15px;">
+                    </div>
+                    <div class="fp-lp-icon-tabs" style="display: flex; gap: 5px; margin-bottom: 15px; border-bottom: 2px solid #ddd;">
+                        <button type="button" class="fp-lp-icon-tab active" data-category="solid">Solid</button>
+                        <button type="button" class="fp-lp-icon-tab" data-category="regular">Regular</button>
+                        <button type="button" class="fp-lp-icon-tab" data-category="brands">Brands</button>
+                    </div>
+                    <div class="fp-lp-icons-grid" id="fp-lp-icons-grid-solid" style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; max-height: 400px; overflow-y: auto; padding: 10px;">
+                        <?php foreach ($icons['fa-solid'] as $icon): ?>
+                            <button type="button" class="fp-lp-icon-item" data-icon="fa-solid <?php echo esc_attr($icon); ?>" title="<?php echo esc_attr($icon); ?>">
+                                <i class="fa-solid <?php echo esc_attr($icon); ?>" style="font-size: 24px;"></i>
+                                <span style="font-size: 10px; display: block; margin-top: 5px; word-break: break-all;"><?php echo esc_html(str_replace('fa-', '', $icon)); ?></span>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="fp-lp-icons-grid" id="fp-lp-icons-grid-regular" style="display: none; grid-template-columns: repeat(8, 1fr); gap: 10px; max-height: 400px; overflow-y: auto; padding: 10px;">
+                        <?php foreach ($icons['fa-regular'] as $icon): ?>
+                            <button type="button" class="fp-lp-icon-item" data-icon="fa-regular <?php echo esc_attr($icon); ?>" title="<?php echo esc_attr($icon); ?>">
+                                <i class="fa-regular <?php echo esc_attr($icon); ?>" style="font-size: 24px;"></i>
+                                <span style="font-size: 10px; display: block; margin-top: 5px; word-break: break-all;"><?php echo esc_html(str_replace('fa-', '', $icon)); ?></span>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="fp-lp-icons-grid" id="fp-lp-icons-grid-brands" style="display: none; grid-template-columns: repeat(8, 1fr); gap: 10px; max-height: 400px; overflow-y: auto; padding: 10px;">
+                        <?php foreach ($icons['fa-brands'] as $icon): ?>
+                            <button type="button" class="fp-lp-icon-item" data-icon="fa-brands <?php echo esc_attr($icon); ?>" title="<?php echo esc_attr($icon); ?>">
+                                <i class="fa-brands <?php echo esc_attr($icon); ?>" style="font-size: 24px;"></i>
+                                <span style="font-size: 10px; display: block; margin-top: 5px; word-break: break-all;"><?php echo esc_html(str_replace('fa-', '', $icon)); ?></span>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="fp-lp-icon-modal-footer">
+                    <button type="button" class="button" id="fp-lp-icon-picker-cancel">
+                        <?php _e('Annulla', 'fp-landing-page'); ?>
+                    </button>
+                    <button type="button" class="button button-primary" id="fp-lp-icon-picker-select" disabled>
+                        <?php _e('Seleziona', 'fp-landing-page'); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <?php
     }
 }

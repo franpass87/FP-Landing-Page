@@ -1422,6 +1422,119 @@
         });
         
         builder.init();
+        builder.initIconPicker();
     });
+    
+    // Icon Picker
+    const iconPicker = {
+        currentTarget: null,
+        selectedIcon: null,
+        
+        init: function() {
+            const self = this;
+            
+            // Apri modal quando si clicca su un pulsante selettore
+            $(document).on('click', '.fp-lp-icon-picker-btn', function(e) {
+                e.preventDefault();
+                const $btn = $(this);
+                const targetSelector = $btn.data('target-input');
+                self.currentTarget = $(targetSelector);
+                self.openModal();
+            });
+            
+            // Cambia tab categoria
+            $(document).on('click', '.fp-lp-icon-tab', function() {
+                const category = $(this).data('category');
+                $('.fp-lp-icon-tab').removeClass('active');
+                $(this).addClass('active');
+                $('.fp-lp-icons-grid').hide();
+                $('#fp-lp-icons-grid-' + category).show();
+                self.filterIcons('');
+            });
+            
+            // Cerca icone
+            $('#fp-lp-icon-search-input').on('input', function() {
+                const search = $(this).val().toLowerCase();
+                self.filterIcons(search);
+            });
+            
+            // Seleziona icona
+            $(document).on('click', '.fp-lp-icon-item', function() {
+                $('.fp-lp-icon-item').removeClass('selected');
+                $(this).addClass('selected');
+                self.selectedIcon = $(this).data('icon');
+                $('#fp-lp-icon-picker-select').prop('disabled', false);
+            });
+            
+            // Conferma selezione
+            $('#fp-lp-icon-picker-select').on('click', function() {
+                if (self.selectedIcon && self.currentTarget) {
+                    self.currentTarget.val(self.selectedIcon).trigger('change');
+                    self.closeModal();
+                }
+            });
+            
+            // Annulla/Chiudi
+            $('#fp-lp-icon-picker-cancel, .fp-lp-icon-modal-close, .fp-lp-icon-modal-overlay').on('click', function() {
+                self.closeModal();
+            });
+            
+            // Chiudi con ESC
+            $(document).on('keydown', function(e) {
+                if (e.key === 'Escape' && $('#fp-lp-icon-picker-modal').is(':visible')) {
+                    self.closeModal();
+                }
+            });
+        },
+        
+        openModal: function() {
+            this.selectedIcon = null;
+            $('#fp-lp-icon-picker-modal').fadeIn(200);
+            $('#fp-lp-icon-search-input').val('').focus();
+            $('.fp-lp-icon-item').removeClass('selected');
+            $('#fp-lp-icon-picker-select').prop('disabled', true);
+            
+            // Mostra categoria solid di default
+            $('.fp-lp-icon-tab').removeClass('active');
+            $('.fp-lp-icon-tab[data-category="solid"]').addClass('active');
+            $('.fp-lp-icons-grid').hide();
+            $('#fp-lp-icons-grid-solid').show();
+        },
+        
+        closeModal: function() {
+            $('#fp-lp-icon-picker-modal').fadeOut(200);
+            this.currentTarget = null;
+            this.selectedIcon = null;
+            $('#fp-lp-icon-search-input').val('');
+            $('.fp-lp-icon-item').removeClass('selected');
+        },
+        
+        filterIcons: function(search) {
+            const activeCategory = $('.fp-lp-icon-tab.active').data('category');
+            const $grid = $('#fp-lp-icons-grid-' + activeCategory);
+            
+            if (!search) {
+                $grid.find('.fp-lp-icon-item').show();
+                return;
+            }
+            
+            $grid.find('.fp-lp-icon-item').each(function() {
+                const $item = $(this);
+                const iconName = $item.data('icon').toLowerCase();
+                if (iconName.includes(search)) {
+                    $item.show();
+                } else {
+                    $item.hide();
+                }
+            });
+        }
+    };
+    
+    // Inizializza icon picker quando il DOM è pronto
+    if (typeof jQuery !== 'undefined') {
+        jQuery(document).ready(function($) {
+            iconPicker.init();
+        });
+    }
     
 })(jQuery);
