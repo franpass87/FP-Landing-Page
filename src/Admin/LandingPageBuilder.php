@@ -245,7 +245,7 @@ class LandingPageBuilder {
                         <th><label>Peso Font</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="font_weight">
-                                <option value="" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', ''); ?>>Default</option>
+                                <option value="" <?php selected((isset($data['font_weight']) ? $data['font_weight'] : ''), ''); ?>>Default</option>
                                 <option value="300" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', '300'); ?>>300 (Light)</option>
                                 <option value="400" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', '400'); ?>>400 (Normal)</option>
                                 <option value="600" <?php selected(isset($data['font_weight']) ? $data['font_weight'] : '', '600'); ?>>600 (Semi-Bold)</option>
@@ -287,7 +287,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Mobile</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_mobile">
-                                <option value="" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_mobile']) ? $data['align_mobile'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'right'); ?>>Destra</option>
@@ -298,7 +298,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Tablet</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_tablet">
-                                <option value="" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_tablet']) ? $data['align_tablet'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'right'); ?>>Destra</option>
@@ -309,7 +309,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Desktop</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_desktop">
-                                <option value="" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_desktop']) ? $data['align_desktop'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'right'); ?>>Destra</option>
@@ -356,7 +356,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Mobile</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_mobile">
-                                <option value="" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_mobile']) ? $data['align_mobile'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'right'); ?>>Destra</option>
@@ -368,7 +368,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Tablet</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_tablet">
-                                <option value="" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_tablet']) ? $data['align_tablet'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'right'); ?>>Destra</option>
@@ -380,7 +380,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Desktop</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_desktop">
-                                <option value="" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_desktop']) ? $data['align_desktop'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'right'); ?>>Destra</option>
@@ -508,7 +508,7 @@ class LandingPageBuilder {
                 <th><label>Allineamento Mobile</label></th>
                 <td>
                     <select class="fp-lp-field" data-field="align_mobile">
-                        <option value="" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', ''); ?>>Usa allineamento generale</option>
+                        <option value="" <?php selected((isset($data['align_mobile']) ? $data['align_mobile'] : ''), ''); ?>>Usa allineamento generale</option>
                         <option value="left" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'left'); ?>>Sinistra</option>
                         <option value="center" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'center'); ?>>Centro</option>
                         <option value="right" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'right'); ?>>Destra</option>
@@ -519,7 +519,7 @@ class LandingPageBuilder {
                 <th><label>Allineamento Tablet</label></th>
                 <td>
                     <select class="fp-lp-field" data-field="align_tablet">
-                        <option value="" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', ''); ?>>Usa allineamento generale</option>
+                        <option value="" <?php selected((isset($data['align_tablet']) ? $data['align_tablet'] : ''), ''); ?>>Usa allineamento generale</option>
                         <option value="left" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'left'); ?>>Sinistra</option>
                         <option value="center" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'center'); ?>>Centro</option>
                         <option value="right" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'right'); ?>>Destra</option>
@@ -530,7 +530,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Desktop</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_desktop">
-                                <option value="" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_desktop']) ? $data['align_desktop'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'right'); ?>>Destra</option>
@@ -705,7 +705,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Mobile</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_mobile">
-                                <option value="" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_mobile']) ? $data['align_mobile'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_mobile']) ? $data['align_mobile'] : '', 'right'); ?>>Destra</option>
@@ -716,7 +716,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Tablet</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_tablet">
-                                <option value="" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_tablet']) ? $data['align_tablet'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_tablet']) ? $data['align_tablet'] : '', 'right'); ?>>Destra</option>
@@ -727,7 +727,7 @@ class LandingPageBuilder {
                         <th><label>Allineamento Desktop</label></th>
                         <td>
                             <select class="fp-lp-field" data-field="align_desktop">
-                                <option value="" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', ''); ?>>Usa allineamento generale</option>
+                                <option value="" <?php selected((isset($data['align_desktop']) ? $data['align_desktop'] : ''), ''); ?>>Usa allineamento generale</option>
                                 <option value="left" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'left'); ?>>Sinistra</option>
                                 <option value="center" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'center'); ?>>Centro</option>
                                 <option value="right" <?php selected(isset($data['align_desktop']) ? $data['align_desktop'] : '', 'right'); ?>>Destra</option>
