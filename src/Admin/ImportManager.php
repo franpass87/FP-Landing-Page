@@ -322,6 +322,9 @@ class ImportManager {
             foreach ($item as $key => $value) {
                 if ($key === 'text' || $key === 'content' || $key === 'answer') {
                     $sanitized_item[$key] = wp_kses_post($value);
+                } elseif (strpos($key, 'color') !== false || strpos($key, '_color') !== false) {
+                    // Sanitizza colori hex
+                    $sanitized_item[$key] = sanitize_hex_color($value);
                 } else {
                     $sanitized_item[$key] = sanitize_text_field($value);
                 }
