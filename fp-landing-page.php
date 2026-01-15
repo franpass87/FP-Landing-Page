@@ -112,7 +112,7 @@ if (!function_exists('\\FPLandingPage\\find_composer_binary')) {
                     }
                 }
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // Ignora errori nella ricerca di composer
         }
         
@@ -139,7 +139,7 @@ if (!function_exists('\\FPLandingPage\\try_composer_install')) {
             @exec($command, $output, $return_var);
             
             return $return_var === 0;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
     }
