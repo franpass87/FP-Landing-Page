@@ -231,8 +231,8 @@ class Landing {
      * Renderizza una sezione dai dati del builder
      */
     private static function render_section_from_builder($section) {
-        $type = $section['type'] ?? '';
-        $data = $section['data'] ?? [];
+        $type = isset($section['type']) ? $section['type'] : '';
+        $data = isset($section['data']) ? $section['data'] : [];
         $attrs = self::get_section_attributes($data);
         
         // Wrapper per personalizzazioni comuni
@@ -298,20 +298,20 @@ class Landing {
      * Renderizza Titolo
      */
     private static function render_title($data) {
-        $text = $data['text'] ?? '';
-        $level = $data['level'] ?? 'h2';
-        $align = $data['align'] ?? 'left';
-        $font_size = $data['font_size'] ?? '';
-        $text_color = $data['text_color'] ?? '';
-        $font_weight = $data['font_weight'] ?? '';
+        $text = isset($data['text']) ? $data['text'] : '';
+        $level = isset($data['level']) ? $data['level'] : 'h2';
+        $align = isset($data['align']) ? $data['align'] : 'left';
+        $font_size = isset($data['font_size']) ? $data['font_size'] : '';
+        $text_color = isset($data['text_color']) ? $data['text_color'] : '';
+        $font_weight = isset($data['font_weight']) ? $data['font_weight'] : '';
         
         // Responsive
-        $font_size_mobile = $data['font_size_mobile'] ?? '';
-        $font_size_tablet = $data['font_size_tablet'] ?? '';
-        $font_size_desktop = $data['font_size_desktop'] ?? '';
-        $align_mobile = $data['align_mobile'] ?? '';
-        $align_tablet = $data['align_tablet'] ?? '';
-        $align_desktop = $data['align_desktop'] ?? '';
+        $font_size_mobile = isset($data['font_size_mobile']) ? $data['font_size_mobile'] : '';
+        $font_size_tablet = isset($data['font_size_tablet']) ? $data['font_size_tablet'] : '';
+        $font_size_desktop = isset($data['font_size_desktop']) ? $data['font_size_desktop'] : '';
+        $align_mobile = isset($data['align_mobile']) ? $data['align_mobile'] : '';
+        $align_tablet = isset($data['align_tablet']) ? $data['align_tablet'] : '';
+        $align_desktop = isset($data['align_desktop']) ? $data['align_desktop'] : '';
         
         if (empty($text)) {
             return;
@@ -369,13 +369,13 @@ class Landing {
      * Renderizza Testo
      */
     private static function render_text($data) {
-        $content = $data['content'] ?? '';
-        $align = $data['align'] ?? 'left';
+        $content = isset($data['content']) ? $data['content'] : '';
+        $align = isset($data['align']) ? $data['align'] : 'left';
         
         // Responsive alignment
-        $align_mobile = $data['align_mobile'] ?? '';
-        $align_tablet = $data['align_tablet'] ?? '';
-        $align_desktop = $data['align_desktop'] ?? '';
+        $align_mobile = isset($data['align_mobile']) ? $data['align_mobile'] : '';
+        $align_tablet = isset($data['align_tablet']) ? $data['align_tablet'] : '';
+        $align_desktop = isset($data['align_desktop']) ? $data['align_desktop'] : '';
         
         if (empty($content)) {
             return;
@@ -405,10 +405,10 @@ class Landing {
      * Renderizza Immagine
      */
     private static function render_image($data) {
-        $image_id = $data['image_id'] ?? '';
-        $alt = $data['alt'] ?? '';
-        $align = $data['align'] ?? 'center';
-        $link = $data['link'] ?? '';
+        $image_id = isset($data['image_id']) ? $data['image_id'] : '';
+        $alt = isset($data['alt']) ? $data['alt'] : '';
+        $align = isset($data['align']) ? $data['align'] : 'center';
+        $link = isset($data['link']) ? $data['link'] : '';
         
         if (empty($image_id)) {
             return;
@@ -425,17 +425,17 @@ class Landing {
         }
         
         // Personalizzazioni avanzate
-        $max_width = $data['max_width'] ?? '';
-        $border_radius = $data['border_radius'] ?? '';
-        $box_shadow = $data['box_shadow'] ?? '';
+        $max_width = isset($data['max_width']) ? $data['max_width'] : '';
+        $border_radius = isset($data['border_radius']) ? $data['border_radius'] : '';
+        $box_shadow = isset($data['box_shadow']) ? $data['box_shadow'] : '';
         
         // Responsive
-        $max_width_mobile = $data['max_width_mobile'] ?? '';
-        $max_width_tablet = $data['max_width_tablet'] ?? '';
-        $max_width_desktop = $data['max_width_desktop'] ?? '';
-        $align_mobile = $data['align_mobile'] ?? '';
-        $align_tablet = $data['align_tablet'] ?? '';
-        $align_desktop = $data['align_desktop'] ?? '';
+        $max_width_mobile = isset($data['max_width_mobile']) ? $data['max_width_mobile'] : '';
+        $max_width_tablet = isset($data['max_width_tablet']) ? $data['max_width_tablet'] : '';
+        $max_width_desktop = isset($data['max_width_desktop']) ? $data['max_width_desktop'] : '';
+        $align_mobile = isset($data['align_mobile']) ? $data['align_mobile'] : '';
+        $align_tablet = isset($data['align_tablet']) ? $data['align_tablet'] : '';
+        $align_desktop = isset($data['align_desktop']) ? $data['align_desktop'] : '';
         
         $image_style = '';
         if ($max_width) {
@@ -494,8 +494,9 @@ class Landing {
      * Renderizza Galleria
      */
     private static function render_gallery($data) {
-        $gallery_ids = $data['gallery_ids'] ?? '';
-        $columns = absint($data['columns'] ?? 3);
+        $gallery_ids = isset($data['gallery_ids']) ? $data['gallery_ids'] : '';
+        $columns_value = isset($data['columns']) ? $data['columns'] : 3;
+        $columns = absint($columns_value);
         
         if (empty($gallery_ids)) {
             return;
@@ -509,8 +510,8 @@ class Landing {
         $columns = max(1, min(4, $columns)); // Tra 1 e 4 colonne
         
         // Personalizzazioni avanzate
-        $image_border_radius = $data['image_border_radius'] ?? '';
-        $gap = $data['gap'] ?? '';
+        $image_border_radius = isset($data['image_border_radius']) ? $data['image_border_radius'] : '';
+        $gap = isset($data['gap']) ? $data['gap'] : '';
         
         $gallery_style = '';
         if ($gap !== '') {
@@ -545,7 +546,7 @@ class Landing {
      * Renderizza Shortcode
      */
     private static function render_shortcode($data) {
-        $shortcode = $data['shortcode'] ?? '';
+        $shortcode = isset($data['shortcode']) ? $data['shortcode'] : '';
         
         if (empty($shortcode)) {
             return;
@@ -562,18 +563,18 @@ class Landing {
      * Renderizza CTA
      */
     private static function render_cta($data) {
-        $button_text = $data['button_text'] ?? '';
-        $button_url = $data['button_url'] ?? '#';
-        $style = $data['style'] ?? 'primary';
-        $align = $data['align'] ?? 'center';
-        $button_bg_color = $data['button_bg_color'] ?? '';
-        $button_text_color = $data['button_text_color'] ?? '';
-        $button_border_radius = $data['button_border_radius'] ?? '';
+        $button_text = isset($data['button_text']) ? $data['button_text'] : '';
+        $button_url = isset($data['button_url']) ? $data['button_url'] : '#';
+        $style = isset($data['style']) ? $data['style'] : 'primary';
+        $align = isset($data['align']) ? $data['align'] : 'center';
+        $button_bg_color = isset($data['button_bg_color']) ? $data['button_bg_color'] : '';
+        $button_text_color = isset($data['button_text_color']) ? $data['button_text_color'] : '';
+        $button_border_radius = isset($data['button_border_radius']) ? $data['button_border_radius'] : '';
         
         // Responsive alignment
-        $align_mobile = $data['align_mobile'] ?? '';
-        $align_tablet = $data['align_tablet'] ?? '';
-        $align_desktop = $data['align_desktop'] ?? '';
+        $align_mobile = isset($data['align_mobile']) ? $data['align_mobile'] : '';
+        $align_tablet = isset($data['align_tablet']) ? $data['align_tablet'] : '';
+        $align_desktop = isset($data['align_desktop']) ? $data['align_desktop'] : '';
         
         if (empty($button_text)) {
             return;
@@ -626,8 +627,8 @@ class Landing {
      * Renderizza Video
      */
     private static function render_video($data) {
-        $video_url = $data['video_url'] ?? '';
-        $align = $data['align'] ?? 'center';
+        $video_url = isset($data['video_url']) ? $data['video_url'] : '';
+        $align = isset($data['align']) ? $data['align'] : 'center';
         
         if (empty($video_url)) {
             return;
@@ -683,8 +684,9 @@ class Landing {
      * Renderizza Separatore
      */
     private static function render_separator($data) {
-        $style = $data['style'] ?? 'solid';
-        $height = absint($data['height'] ?? 40);
+        $style = isset($data['style']) ? $data['style'] : 'solid';
+        $height_value = isset($data['height']) ? $data['height'] : 40;
+        $height = absint($height_value);
         
         if ($style === 'space') {
             ?>
@@ -702,8 +704,9 @@ class Landing {
      * Renderizza Features
      */
     private static function render_features($data) {
-        $features = $data['features'] ?? [];
-        $columns = absint($data['columns'] ?? 3);
+        $features = isset($data['features']) ? $data['features'] : [];
+        $columns_value = isset($data['columns']) ? $data['columns'] : 3;
+        $columns = absint($columns_value);
         
         if (empty($features) || !is_array($features)) {
             return;
@@ -716,9 +719,9 @@ class Landing {
         <div class="fp-lp-features-section">
             <div class="fp-lp-features-grid <?php echo esc_attr($columns_class); ?>">
                 <?php foreach ($features as $feature): 
-                    $icon = $feature['icon'] ?? '';
-                    $title = $feature['title'] ?? '';
-                    $text = $feature['text'] ?? '';
+                    $icon = isset($feature['icon']) ? $feature['icon'] : '';
+                    $title = isset($feature['title']) ? $feature['title'] : '';
+                    $text = isset($feature['text']) ? $feature['text'] : '';
                     
                     if (empty($title) && empty($text)) {
                         continue;
@@ -749,8 +752,9 @@ class Landing {
      * Renderizza Contatori
      */
     private static function render_counters($data) {
-        $counters = $data['counters'] ?? [];
-        $columns = absint($data['columns'] ?? 4);
+        $counters = isset($data['counters']) ? $data['counters'] : [];
+        $columns_value = isset($data['columns']) ? $data['columns'] : 4;
+        $columns = absint($columns_value);
         
         if (empty($counters) || !is_array($counters)) {
             return;
@@ -763,11 +767,11 @@ class Landing {
         <div class="fp-lp-counters-section">
             <div class="fp-lp-counters-grid <?php echo esc_attr($columns_class); ?>">
                 <?php foreach ($counters as $counter): 
-                    $number = $counter['number'] ?? '';
-                    $label = $counter['label'] ?? '';
-                    $prefix = $counter['prefix'] ?? '';
-                    $suffix = $counter['suffix'] ?? '';
-                    $icon = $counter['icon'] ?? '';
+                    $number = isset($counter['number']) ? $counter['number'] : '';
+                    $label = isset($counter['label']) ? $counter['label'] : '';
+                    $prefix = isset($counter['prefix']) ? $counter['prefix'] : '';
+                    $suffix = isset($counter['suffix']) ? $counter['suffix'] : '';
+                    $icon = isset($counter['icon']) ? $counter['icon'] : '';
                     
                     if (empty($number) && empty($label)) {
                         continue;
@@ -798,7 +802,7 @@ class Landing {
      * Renderizza FAQ
      */
     private static function render_faq($data) {
-        $faqs = $data['faqs'] ?? [];
+        $faqs = isset($data['faqs']) ? $data['faqs'] : [];
         
         if (empty($faqs) || !is_array($faqs)) {
             return;
@@ -808,8 +812,8 @@ class Landing {
         <div class="fp-lp-faq-section">
             <div class="fp-lp-faq-list">
                 <?php foreach ($faqs as $i => $faq): 
-                    $question = $faq['question'] ?? '';
-                    $answer = $faq['answer'] ?? '';
+                    $question = isset($faq['question']) ? $faq['question'] : '';
+                    $answer = isset($faq['answer']) ? $faq['answer'] : '';
                     
                     if (empty($question) && empty($answer)) {
                         continue;
@@ -838,7 +842,7 @@ class Landing {
      * Renderizza Tabs
      */
     private static function render_tabs($data) {
-        $tabs = $data['tabs'] ?? [];
+        $tabs = isset($data['tabs']) ? $data['tabs'] : [];
         
         if (empty($tabs) || !is_array($tabs)) {
             return;
@@ -851,7 +855,7 @@ class Landing {
             <div class="fp-lp-tabs-wrapper" id="<?php echo esc_attr($tabs_id); ?>">
                 <div class="fp-lp-tabs-nav">
                     <?php foreach ($tabs as $i => $tab): 
-                        $title = $tab['title'] ?? '';
+                        $title = isset($tab['title']) ? $tab['title'] : '';
                         if (empty($title)) {
                             continue;
                         }
@@ -868,8 +872,8 @@ class Landing {
                     <?php 
                     $first_active = true;
                     foreach ($tabs as $i => $tab): 
-                        $title = $tab['title'] ?? '';
-                        $content = $tab['content'] ?? '';
+                        $title = isset($tab['title']) ? $tab['title'] : '';
+                        $content = isset($tab['content']) ? $tab['content'] : '';
                         if (empty($title)) {
                             continue;
                         }

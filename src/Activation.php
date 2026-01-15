@@ -134,10 +134,10 @@ class Activation {
         }
         
         // Verifica versione PHP
-        if (version_compare(PHP_VERSION, '7.0', '<')) {
+        if (version_compare(PHP_VERSION, '5.6', '<')) {
             deactivate_plugins(plugin_basename(FP_LANDING_PAGE_FILE));
             wp_die(
-                sprintf(__('FP Landing Page richiede PHP 7.0 o superiore. La versione attuale è %s.', 'fp-landing-page'), PHP_VERSION),
+                sprintf(__('FP Landing Page richiede PHP 5.6 o superiore. La versione attuale è %s.', 'fp-landing-page'), PHP_VERSION),
                 __('Requisiti non soddisfatti', 'fp-landing-page'),
                 ['back_link' => true]
             );
