@@ -182,29 +182,66 @@ if (!file_exists($autoload_path)) {
     }
 }
 
-if (file_exists($autoload_path)) {
-    require_once $autoload_path;
+if (!file_exists($autoload_path)) {
+    // Se autoload non esiste, NON continuare - il plugin non può funzionare
+    return;
+}
+
+require_once $autoload_path;
+
+// Verifica che le classi siano disponibili prima di inizializzare
+if (!class_exists('FPLandingPage\Plugin')) {
+    // Se la classe Plugin non esiste, qualcosa è andato storto con l'autoload
+    add_action('admin_notices', function() {
+        if (function_exists('current_user_can') && current_user_can('activate_plugins')) {
+            echo '<div class="notice notice-error"><p>';
+            echo '<strong>' . esc_html__('FP Landing Page:', 'fp-landing-page') . '</strong> ';
+            echo esc_html__('Errore nel caricamento delle classi. Esegui', 'fp-landing-page') . ' <code>composer install</code> ';
+            echo esc_html__('nella cartella del plugin.', 'fp-landing-page');
+            echo '</p></div>';
+        }
+    });
+    return;
 }
 
 // Inizializza il plugin
 add_action('plugins_loaded', function() {
+    // Verifica nuovamente che autoload sia caricato
+    if (!class_exists('FPLandingPage\Plugin')) {
+        return;
+    }
+    
     // Carica traduzioni
     load_plugin_textdomain('fp-landing-page', false, dirname(FP_LANDING_PAGE_BASENAME) . '/languages');
     
     // Inizializza il plugin principale
-    Plugin::get_instance();
+    \FPLandingPage\Plugin::get_instance();
 }, 10);
 
 // Hook di attivazione
 register_activation_hook(__FILE__, function() {
+    // Verifica che autoload sia caricato
+    $autoload_path = FP_LANDING_PAGE_DIR . 'vendor/autoload.php';
+    if (!file_exists($autoload_path)) {
+        return;
+    }
+    require_once $autoload_path;
+    
     if (class_exists('FPLandingPage\Activation')) {
-        Activation::activate();
+        \FPLandingPage\Activation::activate();
     }
 });
 
 // Hook di disattivazione
 register_deactivation_hook(__FILE__, function() {
+    // Verifica che autoload sia caricato
+    $autoload_path = FP_LANDING_PAGE_DIR . 'vendor/autoload.php';
+    if (!file_exists($autoload_path)) {
+        return;
+    }
+    require_once $autoload_path;
+    
     if (class_exists('FPLandingPage\Deactivation')) {
-        Deactivation::deactivate();
+        \FPLandingPage\Deactivation::deactivate();
     }
 });
