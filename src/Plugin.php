@@ -68,6 +68,12 @@ class Plugin {
     private function init_hooks() {
         // Hook per inizializzazione
         add_action('init', [$this, 'init'], 0);
+        
+        // Flush rewrite rules dopo aggiornamento plugin
+        add_action('upgrader_process_complete', [$this, 'maybe_flush_rewrite_rules'], 10, 2);
+        
+        // Verifica versione e flush se necessario
+        add_action('admin_init', [$this, 'check_version_and_flush_rules']);
     }
     
     /**
@@ -126,6 +132,37 @@ class Plugin {
         // Template override
         if (class_exists('\FPLandingPage\Template')) {
             new \FPLandingPage\Template();
+        }
+    }
+    
+    /**
+     * Flush rewrite rules dopo aggiornamento plugin
+     */
+    public function maybe_flush_rewrite_rules($upgrader_object, $options) {
+        if ($options['action'] === 'update' && $options['type'] === 'plugin') {
+            $plugin_file = plugin_basename(FP_LANDING_PAGE_FILE);
+            
+            // Verifica se questo plugin è stato aggiornato
+            if (isset($options['plugins']) && in_array($plugin_file, $options['plugins'])) {
+                // Flush rewrite rules dopo aggiornamento
+                flush_rewrite_rules(false);
+                
+                // Aggiorna versione salvata
+                update_option('fp_landing_page_version', FP_LANDING_PAGE_VERSION);
+            }
+        }
+    }
+    
+    /**
+     * Verifica versione e flush rewrite rules se necessario
+     */
+    public function check_version_and_flush_rules() {
+        $saved_version = get_option('fp_landing_page_version', '0');
+        
+        // Se la versione è cambiata, flush rewrite rules
+        if (version_compare($saved_version, FP_LANDING_PAGE_VERSION, '<')) {
+            flush_rewrite_rules(false);
+            update_option('fp_landing_page_version', FP_LANDING_PAGE_VERSION);
         }
     }
 }
