@@ -69,6 +69,8 @@ class Plugin {
             new Admin\MetaBoxes();
             Admin\LandingPageBuilder::get_instance();
             new Admin\SeoIntegration();
+            new Admin\ImportManager();
+            new Admin\InstructionsPage();
         }
         
         // Shortcodes

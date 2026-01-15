@@ -1,0 +1,124 @@
+/**
+ * FP Landing Page Import - CSS
+ */
+
+#fp-lp-import-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fp-lp-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}
+
+.fp-lp-modal-content {
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.fp-lp-modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fp-lp-modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.fp-lp-modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #666;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.fp-lp-modal-close:hover {
+    color: #000;
+}
+
+.fp-lp-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.fp-lp-modal-body pre {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 11px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}
+
+.fp-lp-modal-body textarea {
+    width: 100%;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.fp-lp-modal-body textarea:focus {
+    outline: none;
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+
+.fp-lp-modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.fp-lp-modal-footer .button {
+    min-width: 100px;
+}
+
+.fp-lp-modal-footer .spinner {
+    visibility: hidden;
+    float: none;
+    margin: 0 5px 0 0;
+}
+
+#fp-lp-import-btn {
+    margin-right: 10px;
+}
+
+#fp-lp-import-btn .dashicons {
+    margin-right: 5px;
+}
