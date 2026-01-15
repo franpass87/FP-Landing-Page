@@ -4,7 +4,7 @@ Tags: landing-page, builder, custom-post-type, shortcode
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,14 @@ Plugin WordPress per la gestione e creazione di landing page personalizzate **se
 3. Vai in WordPress → Landing Pages per creare la prima landing page
 
 == Changelog ==
+
+= 1.0.4 =
+* Fix: Registrate classi ImportManager e InstructionsPage in Plugin.php
+* Fix: Corretto LandingPageBuilder per usare get_instance()
+
+= 1.0.3 =
+* Refactor: Semplificato codice principale del plugin
+* Update: Migliorata inizializzazione componenti
 
 = 1.0.2 =
 * Feature: Aggiunta funzionalità import landing page da JSON
