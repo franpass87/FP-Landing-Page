@@ -816,6 +816,13 @@ class LandingPageBuilder {
                 </td>
             </tr>
             <tr>
+                <th><label>Colore Icone (globale)</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="icon_color" value="<?php echo esc_attr(isset($data['icon_color']) ? $data['icon_color'] : ''); ?>" placeholder="#0073aa" style="width: 200px;">
+                    <p class="description">Colore hex per tutte le icone (es: #0073aa, #ff0000). Lascia vuoto per default.</p>
+                </td>
+            </tr>
+            <tr>
                 <th><label>Features</label></th>
                 <td>
                     <div class="fp-lp-features-list" data-index="<?php echo esc_attr($index); ?>">
@@ -831,6 +838,13 @@ class LandingPageBuilder {
                                         <td style="padding: 5px 0;">
                                             <input type="text" class="fp-lp-feature-field" data-field="icon" data-feature-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr((isset($feature['icon']) ? $feature['icon'] : '')); ?>" style="width: 100%;" placeholder="fa fa-star">
                                             <p class="description">Usa classi Font Awesome o altre librerie di icone</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px 0;"><label>Colore Icona</label></td>
+                                        <td style="padding: 5px 0;">
+                                            <input type="text" class="fp-lp-feature-field" data-field="icon_color" data-feature-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr(isset($feature['icon_color']) ? $feature['icon_color'] : ''); ?>" style="width: 200px;" placeholder="#0073aa">
+                                            <p class="description">Colore hex personalizzato per questa icona (opzionale)</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -878,6 +892,13 @@ class LandingPageBuilder {
                 </td>
             </tr>
             <tr>
+                <th><label>Colore Icone (globale)</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="icon_color" value="<?php echo esc_attr(isset($data['icon_color']) ? $data['icon_color'] : ''); ?>" placeholder="#0073aa" style="width: 200px;">
+                    <p class="description">Colore hex per tutte le icone (es: #0073aa, #ff0000). Lascia vuoto per default.</p>
+                </td>
+            </tr>
+            <tr>
                 <th><label>Contatori</label></th>
                 <td>
                     <div class="fp-lp-counters-list" data-index="<?php echo esc_attr($index); ?>">
@@ -892,6 +913,13 @@ class LandingPageBuilder {
                                         <td style="padding: 5px 0;"><label>Icona (classe CSS, opzionale)</label></td>
                                         <td style="padding: 5px 0;">
                                             <input type="text" class="fp-lp-counter-field" data-field="icon" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['icon'] ?? ''); ?>" style="width: 100%;" placeholder="fa fa-users">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px 0;"><label>Colore Icona</label></td>
+                                        <td style="padding: 5px 0;">
+                                            <input type="text" class="fp-lp-counter-field" data-field="icon_color" data-counter-index="<?php echo esc_attr($i); ?>" value="<?php echo esc_attr($counter['icon_color'] ?? ''); ?>" style="width: 200px;" placeholder="#0073aa">
+                                            <p class="description">Colore hex personalizzato per questa icona (opzionale)</p>
                                         </td>
                                     </tr>
                                     <tr>

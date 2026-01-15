@@ -715,21 +715,35 @@ class Landing {
         $columns = max(1, min(4, $columns)); // Tra 1 e 4 colonne
         $columns_class = 'fp-lp-features-columns-' . $columns;
         
+        // Colore icone globale per la sezione
+        $icon_color = isset($data['icon_color']) ? $data['icon_color'] : '';
+        $section_icon_style = '';
+        if ($icon_color) {
+            $section_icon_style = '--fp-lp-feature-icon-color: ' . esc_attr($icon_color) . ';';
+        }
+        
         ?>
-        <div class="fp-lp-features-section">
+        <div class="fp-lp-features-section"<?php echo $section_icon_style ? ' style="' . $section_icon_style . '"' : ''; ?>>
             <div class="fp-lp-features-grid <?php echo esc_attr($columns_class); ?>">
                 <?php foreach ($features as $feature): 
                     $icon = isset($feature['icon']) ? $feature['icon'] : '';
                     $title = isset($feature['title']) ? $feature['title'] : '';
                     $text = isset($feature['text']) ? $feature['text'] : '';
+                    $icon_color_item = isset($feature['icon_color']) ? $feature['icon_color'] : '';
                     
                     if (empty($title) && empty($text)) {
                         continue;
                     }
+                    
+                    // Stile icona individuale (prevalenza sul globale)
+                    $icon_style = '';
+                    if ($icon_color_item) {
+                        $icon_style = ' style="color: ' . esc_attr($icon_color_item) . ';"';
+                    }
                 ?>
                     <div class="fp-lp-feature-box">
                         <?php if ($icon): ?>
-                            <div class="fp-lp-feature-icon">
+                            <div class="fp-lp-feature-icon"<?php echo $icon_style; ?>>
                                 <i class="<?php echo esc_attr($icon); ?>"></i>
                             </div>
                         <?php endif; ?>
@@ -763,8 +777,15 @@ class Landing {
         $columns = max(1, min(4, $columns)); // Tra 1 e 4 colonne
         $columns_class = 'fp-lp-counters-columns-' . $columns;
         
+        // Colore icone globale per la sezione
+        $icon_color = isset($data['icon_color']) ? $data['icon_color'] : '';
+        $section_icon_style = '';
+        if ($icon_color) {
+            $section_icon_style = '--fp-lp-counter-icon-color: ' . esc_attr($icon_color) . ';';
+        }
+        
         ?>
-        <div class="fp-lp-counters-section">
+        <div class="fp-lp-counters-section"<?php echo $section_icon_style ? ' style="' . $section_icon_style . '"' : ''; ?>>
             <div class="fp-lp-counters-grid <?php echo esc_attr($columns_class); ?>">
                 <?php foreach ($counters as $counter): 
                     $number = isset($counter['number']) ? $counter['number'] : '';
@@ -778,8 +799,14 @@ class Landing {
                     }
                 ?>
                     <div class="fp-lp-counter-box">
-                        <?php if ($icon): ?>
-                            <div class="fp-lp-counter-icon">
+                        <?php if ($icon): 
+                            $icon_color_item = isset($counter['icon_color']) ? $counter['icon_color'] : '';
+                            $icon_style = '';
+                            if ($icon_color_item) {
+                                $icon_style = ' style="color: ' . esc_attr($icon_color_item) . ';"';
+                            }
+                        ?>
+                            <div class="fp-lp-counter-icon"<?php echo $icon_style; ?>>
                                 <i class="<?php echo esc_attr($icon); ?>"></i>
                             </div>
                         <?php endif; ?>

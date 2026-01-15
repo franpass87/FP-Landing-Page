@@ -466,9 +466,13 @@ a.fp-lp-button,
     padding: 20px;
 }
 
+.fp-lp-features-section {
+    --fp-lp-feature-icon-color: #0073aa; /* Default color, può essere sovrascritto */
+}
+
 .fp-lp-feature-icon {
     font-size: 64px;
-    color: #0073aa;
+    color: var(--fp-lp-feature-icon-color, #0073aa);
     margin-bottom: 20px;
 }
 
@@ -553,9 +557,13 @@ a.fp-lp-button,
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
+.fp-lp-counters-section {
+    --fp-lp-counter-icon-color: #0073aa; /* Default color, può essere sovrascritto */
+}
+
 .fp-lp-counter-icon {
     font-size: 36px;
-    color: #0073aa;
+    color: var(--fp-lp-counter-icon-color, #0073aa);
     margin-bottom: 12px;
     margin-top: 0;
     padding-top: 5px;
