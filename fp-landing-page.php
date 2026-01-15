@@ -35,22 +35,104 @@ if (!defined('FP_LANDING_PAGE_BASENAME')) {
     define('FP_LANDING_PAGE_BASENAME', plugin_basename(__FILE__));
 }
 
+/**
+ * Funzioni helper per Composer
+ */
+if (!function_exists('FPLandingPage\find_composer_binary')) {
+    function find_composer_binary() {
+        $paths = ['composer', 'composer.phar'];
+        
+        // Su Windows
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $paths = array_merge($paths, ['composer.bat']);
+        }
+        
+        // Percorsi comuni
+        $home = getenv('HOME') ?: getenv('USERPROFILE');
+        $common_paths = [
+            '/usr/local/bin/composer',
+            '/usr/bin/composer',
+        ];
+        
+        if ($home) {
+            $common_paths[] = $home . '/.composer/vendor/bin/composer';
+            $common_paths[] = $home . '/.config/composer/vendor/bin/composer';
+        }
+        
+        $paths = array_merge($paths, $common_paths);
+        
+        foreach ($paths as $path) {
+            if (empty($path)) {
+                continue;
+            }
+            $output = [];
+            $return_var = 0;
+            @exec(escapeshellarg($path) . ' --version 2>&1', $output, $return_var);
+            if ($return_var === 0) {
+                return $path;
+            }
+        }
+        
+        return false;
+    }
+}
+
+if (!function_exists('FPLandingPage\try_composer_install')) {
+    function try_composer_install($plugin_dir) {
+        $composer_path = \FPLandingPage\find_composer_binary();
+        
+        if (!$composer_path) {
+            return false;
+        }
+        
+        $command = escapeshellarg($composer_path) . ' install --no-dev --optimize-autoloader --no-interaction --working-dir=' . escapeshellarg($plugin_dir) . ' 2>&1';
+        
+        $output = [];
+        $return_var = 0;
+        @exec($command, $output, $return_var);
+        
+        return $return_var === 0;
+    }
+}
+
 // Autoload PSR-4 via Composer
 $autoload_path = FP_LANDING_PAGE_DIR . 'vendor/autoload.php';
+if (!file_exists($autoload_path)) {
+    // Tenta di eseguire composer install automaticamente
+    $composer_installed = false;
+    
+    // Solo in admin per evitare overhead su frontend
+    if (is_admin() && file_exists(FP_LANDING_PAGE_DIR . 'composer.json')) {
+        $composer_installed = \FPLandingPage\try_composer_install(FP_LANDING_PAGE_DIR);
+        
+        // Se installato con successo, ricarica il file
+        if ($composer_installed && file_exists($autoload_path)) {
+            require_once $autoload_path;
+        }
+    }
+    
+    // Se ancora non esiste, mostra avviso
+    if (!file_exists($autoload_path)) {
+        add_action('admin_notices', function() use ($composer_installed) {
+            if (!current_user_can('activate_plugins')) {
+                return;
+            }
+            $plugin_dir = esc_html(FP_LANDING_PAGE_DIR);
+            echo '<div class="notice notice-error"><p>';
+            echo '<strong>' . esc_html__('FP Landing Page:', 'fp-landing-page') . '</strong> ';
+            if ($composer_installed === false) {
+                echo esc_html__('Impossibile eseguire automaticamente composer install.', 'fp-landing-page') . ' ';
+            }
+            echo esc_html__('Esegui manualmente:', 'fp-landing-page') . ' <code>composer install</code> ';
+            echo esc_html__('nella cartella del plugin:', 'fp-landing-page') . ' <code>' . $plugin_dir . '</code>';
+            echo '</p></div>';
+        });
+        return;
+    }
+}
+
 if (file_exists($autoload_path)) {
     require_once $autoload_path;
-} else {
-    add_action('admin_notices', function() {
-        if (!current_user_can('activate_plugins')) {
-            return;
-        }
-        echo '<div class="notice notice-error"><p>';
-        echo '<strong>' . esc_html__('FP Landing Page:', 'fp-landing-page') . '</strong> ';
-        echo esc_html__('Esegui', 'fp-landing-page') . ' <code>composer install</code> ';
-        echo esc_html__('nella cartella del plugin.', 'fp-landing-page');
-        echo '</p></div>';
-    });
-    return;
 }
 
 // Inizializza il plugin
