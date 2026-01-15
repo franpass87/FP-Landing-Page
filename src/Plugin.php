@@ -94,12 +94,22 @@ class Plugin {
             }
             
             if (class_exists('\FPLandingPage\Admin\LandingPageBuilder')) {
-                new \FPLandingPage\Admin\LandingPageBuilder();
+                \FPLandingPage\Admin\LandingPageBuilder::get_instance();
             }
             
             // Integrazione con FP SEO Manager
             if (class_exists('\FPLandingPage\Admin\SeoIntegration')) {
                 new \FPLandingPage\Admin\SeoIntegration();
+            }
+            
+            // Import Manager per importazione landing page da JSON
+            if (class_exists('\FPLandingPage\Admin\ImportManager')) {
+                new \FPLandingPage\Admin\ImportManager();
+            }
+            
+            // Pagina istruzioni ChatGPT
+            if (class_exists('\FPLandingPage\Admin\InstructionsPage')) {
+                new \FPLandingPage\Admin\InstructionsPage();
             }
         }
         
