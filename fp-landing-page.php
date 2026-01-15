@@ -200,30 +200,43 @@ add_action('plugins_loaded', function() {
     \FPLandingPage\Plugin::get_instance();
 }, 10);
 
-// Hook di attivazione
-register_activation_hook(__FILE__, function() {
-    // Verifica che autoload sia caricato
-    $autoload_path = FP_LANDING_PAGE_DIR . 'vendor/autoload.php';
-    if (!file_exists($autoload_path)) {
-        return;
-    }
-    require_once $autoload_path;
-    
-    if (class_exists('FPLandingPage\Activation')) {
-        \FPLandingPage\Activation::activate();
-    }
-});
+// Hook di attivazione - solo se autoload esiste
+if (file_exists($autoload_path)) {
+    register_activation_hook(__FILE__, function() {
+        // Verifica che autoload sia ancora presente
+        $autoload_path_check = FP_LANDING_PAGE_DIR . 'vendor/autoload.php';
+        if (!file_exists($autoload_path_check)) {
+            // Se autoload non esiste durante l'attivazione, disattiva il plugin
+            if (function_exists('deactivate_plugins')) {
+                deactivate_plugins(FP_LANDING_PAGE_BASENAME);
+            }
+            wp_die(
+                'FP Landing Page: Le dipendenze Composer non sono installate. Esegui "composer install" nella cartella del plugin.',
+                'Errore Attivazione Plugin',
+                array('back_link' => true)
+            );
+            return;
+        }
+        require_once $autoload_path_check;
+        
+        if (class_exists('FPLandingPage\Activation')) {
+            \FPLandingPage\Activation::activate();
+        }
+    });
+}
 
-// Hook di disattivazione
-register_deactivation_hook(__FILE__, function() {
-    // Verifica che autoload sia caricato
-    $autoload_path = FP_LANDING_PAGE_DIR . 'vendor/autoload.php';
-    if (!file_exists($autoload_path)) {
-        return;
-    }
-    require_once $autoload_path;
-    
-    if (class_exists('FPLandingPage\Deactivation')) {
-        \FPLandingPage\Deactivation::deactivate();
-    }
-});
+// Hook di disattivazione - solo se autoload esiste
+if (file_exists($autoload_path)) {
+    register_deactivation_hook(__FILE__, function() {
+        // Verifica che autoload sia ancora presente
+        $autoload_path_check = FP_LANDING_PAGE_DIR . 'vendor/autoload.php';
+        if (!file_exists($autoload_path_check)) {
+            return;
+        }
+        require_once $autoload_path_check;
+        
+        if (class_exists('FPLandingPage\Deactivation')) {
+            \FPLandingPage\Deactivation::deactivate();
+        }
+    });
+}
