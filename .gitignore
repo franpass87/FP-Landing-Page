@@ -1,5 +1,5 @@
 # Composer
-/vendor/
+# /vendor/ - INCLUDED nel repository per evitare errori in produzione
 composer.phar
 
 # WordPress
