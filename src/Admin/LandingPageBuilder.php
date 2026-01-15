@@ -791,6 +791,13 @@ class LandingPageBuilder {
                     <input type="number" class="fp-lp-field" data-field="height" value="<?php echo esc_attr($data['height'] ?? '40'); ?>" min="10" max="200" step="10">
                 </td>
             </tr>
+            <tr>
+                <th><label>Colore (solo per linee)</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="color" value="<?php echo esc_attr(isset($data['color']) ? $data['color'] : ''); ?>" placeholder="#e0e0e0" style="width: 200px;">
+                    <p class="description">Colore hex per il bordo del separatore (non applicabile allo spazio)</p>
+                </td>
+            </tr>
         </table>
         <?php
     }
@@ -821,6 +828,20 @@ class LandingPageBuilder {
                 <td>
                     <input type="text" class="fp-lp-field" data-field="icon_color" value="<?php echo esc_attr(isset($data['icon_color']) ? $data['icon_color'] : ''); ?>" placeholder="#0073aa" style="width: 200px;">
                     <p class="description">Colore hex per tutte le icone (es: #0073aa, #ff0000). Lascia vuoto per default.</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Titoli</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="title_color" value="<?php echo esc_attr(isset($data['title_color']) ? $data['title_color'] : ''); ?>" placeholder="#1d2327" style="width: 200px;">
+                    <p class="description">Colore hex per i titoli delle features</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Testo</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="text_color" value="<?php echo esc_attr(isset($data['text_color']) ? $data['text_color'] : ''); ?>" placeholder="#666" style="width: 200px;">
+                    <p class="description">Colore hex per il testo descrittivo delle features</p>
                 </td>
             </tr>
             <tr>
@@ -902,6 +923,20 @@ class LandingPageBuilder {
                 <td>
                     <input type="text" class="fp-lp-field" data-field="icon_color" value="<?php echo esc_attr(isset($data['icon_color']) ? $data['icon_color'] : ''); ?>" placeholder="#0073aa" style="width: 200px;">
                     <p class="description">Colore hex per tutte le icone (es: #0073aa, #ff0000). Lascia vuoto per default.</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Numeri</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="number_color" value="<?php echo esc_attr(isset($data['number_color']) ? $data['number_color'] : ''); ?>" placeholder="#1d2327" style="width: 200px;">
+                    <p class="description">Colore hex per i numeri dei contatori</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Etichette</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="label_color" value="<?php echo esc_attr(isset($data['label_color']) ? $data['label_color'] : ''); ?>" placeholder="#50575e" style="width: 200px;">
+                    <p class="description">Colore hex per le etichette dei contatori</p>
                 </td>
             </tr>
             <tr>
@@ -1076,6 +1111,13 @@ class LandingPageBuilder {
                 <td>
                     <input type="text" class="fp-lp-field" data-field="border_color" value="<?php echo esc_attr(isset($data['border_color']) ? $data['border_color'] : ''); ?>" placeholder="#e0e0e0" style="width: 200px;">
                     <p class="description">Colore hex per il bordo inferiore dei tab</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Contenuto</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="content_color" value="<?php echo esc_attr(isset($data['content_color']) ? $data['content_color'] : ''); ?>" placeholder="#555" style="width: 200px;">
+                    <p class="description">Colore hex per il contenuto dei tab</p>
                 </td>
             </tr>
             <tr>

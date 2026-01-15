@@ -687,6 +687,7 @@ class Landing {
         $style = isset($data['style']) ? $data['style'] : 'solid';
         $height_value = isset($data['height']) ? $data['height'] : 40;
         $height = absint($height_value);
+        $color = isset($data['color']) ? $data['color'] : '';
         
         if ($style === 'space') {
             ?>
@@ -694,8 +695,12 @@ class Landing {
             <?php
         } else {
             $border_style = in_array($style, ['solid', 'dashed', 'dotted']) ? $style : 'solid';
+            $separator_style = 'border-top-style: ' . esc_attr($border_style) . '; margin: ' . esc_attr($height / 2) . 'px 0;';
+            if ($color) {
+                $separator_style .= ' border-top-color: ' . esc_attr($color) . ';';
+            }
             ?>
-            <div class="fp-lp-separator fp-lp-separator-<?php echo esc_attr($border_style); ?>" style="border-top-style: <?php echo esc_attr($border_style); ?>; margin: <?php echo esc_attr($height / 2); ?>px 0;"></div>
+            <div class="fp-lp-separator fp-lp-separator-<?php echo esc_attr($border_style); ?>" style="<?php echo $separator_style; ?>"></div>
             <?php
         }
     }
@@ -715,15 +720,26 @@ class Landing {
         $columns = max(1, min(4, $columns)); // Tra 1 e 4 colonne
         $columns_class = 'fp-lp-features-columns-' . $columns;
         
-        // Colore icone globale per la sezione
+        // Colori personalizzabili per Features
         $icon_color = isset($data['icon_color']) ? $data['icon_color'] : '';
-        $section_icon_style = '';
-        if ($icon_color) {
-            $section_icon_style = '--fp-lp-feature-icon-color: ' . esc_attr($icon_color) . ';';
+        $title_color = isset($data['title_color']) ? $data['title_color'] : '';
+        $text_color = isset($data['text_color']) ? $data['text_color'] : '';
+        
+        $section_style = '';
+        if ($icon_color || $title_color || $text_color) {
+            if ($icon_color) {
+                $section_style .= '--fp-lp-feature-icon-color: ' . esc_attr($icon_color) . ';';
+            }
+            if ($title_color) {
+                $section_style .= '--fp-lp-feature-title-color: ' . esc_attr($title_color) . ';';
+            }
+            if ($text_color) {
+                $section_style .= '--fp-lp-feature-text-color: ' . esc_attr($text_color) . ';';
+            }
         }
         
         ?>
-        <div class="fp-lp-features-section"<?php echo $section_icon_style ? ' style="' . $section_icon_style . '"' : ''; ?>>
+        <div class="fp-lp-features-section"<?php echo $section_style ? ' style="' . $section_style . '"' : ''; ?>>
             <div class="fp-lp-features-grid <?php echo esc_attr($columns_class); ?>">
                 <?php foreach ($features as $feature): 
                     $icon = isset($feature['icon']) ? $feature['icon'] : '';
@@ -777,15 +793,26 @@ class Landing {
         $columns = max(1, min(4, $columns)); // Tra 1 e 4 colonne
         $columns_class = 'fp-lp-counters-columns-' . $columns;
         
-        // Colore icone globale per la sezione
+        // Colori personalizzabili per Counters
         $icon_color = isset($data['icon_color']) ? $data['icon_color'] : '';
-        $section_icon_style = '';
-        if ($icon_color) {
-            $section_icon_style = '--fp-lp-counter-icon-color: ' . esc_attr($icon_color) . ';';
+        $number_color = isset($data['number_color']) ? $data['number_color'] : '';
+        $label_color = isset($data['label_color']) ? $data['label_color'] : '';
+        
+        $section_style = '';
+        if ($icon_color || $number_color || $label_color) {
+            if ($icon_color) {
+                $section_style .= '--fp-lp-counter-icon-color: ' . esc_attr($icon_color) . ';';
+            }
+            if ($number_color) {
+                $section_style .= '--fp-lp-counter-number-color: ' . esc_attr($number_color) . ';';
+            }
+            if ($label_color) {
+                $section_style .= '--fp-lp-counter-label-color: ' . esc_attr($label_color) . ';';
+            }
         }
         
         ?>
-        <div class="fp-lp-counters-section"<?php echo $section_icon_style ? ' style="' . $section_icon_style . '"' : ''; ?>>
+        <div class="fp-lp-counters-section"<?php echo $section_style ? ' style="' . $section_style . '"' : ''; ?>>
             <div class="fp-lp-counters-grid <?php echo esc_attr($columns_class); ?>">
                 <?php foreach ($counters as $counter): 
                     $number = isset($counter['number']) ? $counter['number'] : '';
@@ -904,9 +931,10 @@ class Landing {
         $tab_active_bg_color = isset($data['active_bg_color']) ? $data['active_bg_color'] : '';
         $tab_active_text_color = isset($data['active_text_color']) ? $data['active_text_color'] : '';
         $tab_border_color = isset($data['border_color']) ? $data['border_color'] : '';
+        $tab_content_color = isset($data['content_color']) ? $data['content_color'] : '';
         
         $tabs_style = '';
-        if ($tab_text_color || $tab_active_bg_color || $tab_active_text_color || $tab_border_color) {
+        if ($tab_text_color || $tab_active_bg_color || $tab_active_text_color || $tab_border_color || $tab_content_color) {
             $tabs_style = ' style="';
             if ($tab_text_color) {
                 $tabs_style .= '--fp-lp-tab-text-color: ' . esc_attr($tab_text_color) . ';';
@@ -919,6 +947,9 @@ class Landing {
             }
             if ($tab_border_color) {
                 $tabs_style .= '--fp-lp-tab-border-color: ' . esc_attr($tab_border_color) . ';';
+            }
+            if ($tab_content_color) {
+                $tabs_style .= '--fp-lp-tab-content-color: ' . esc_attr($tab_content_color) . ';';
             }
             $tabs_style .= '"';
         }
