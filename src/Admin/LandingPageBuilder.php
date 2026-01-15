@@ -968,6 +968,34 @@ class LandingPageBuilder {
         ?>
         <table class="form-table">
             <tr>
+                <th><label>Colore Icona</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="icon_color" value="<?php echo esc_attr(isset($data['icon_color']) ? $data['icon_color'] : ''); ?>" placeholder="#333" style="width: 200px;">
+                    <p class="description">Colore hex per l'icona "+" delle domande (es: #333)</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Testo Domanda</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="question_color" value="<?php echo esc_attr(isset($data['question_color']) ? $data['question_color'] : ''); ?>" placeholder="#1d2327" style="width: 200px;">
+                    <p class="description">Colore hex per il testo delle domande</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Testo Risposta</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="answer_color" value="<?php echo esc_attr(isset($data['answer_color']) ? $data['answer_color'] : ''); ?>" placeholder="#555" style="width: 200px;">
+                    <p class="description">Colore hex per il testo delle risposte</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Sfondo Domanda</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="bg_color" value="<?php echo esc_attr(isset($data['bg_color']) ? $data['bg_color'] : ''); ?>" placeholder="#f8f8f8" style="width: 200px;">
+                    <p class="description">Colore hex per lo sfondo delle domande</p>
+                </td>
+            </tr>
+            <tr>
                 <th><label>FAQ</label></th>
                 <td>
                     <div class="fp-lp-faqs-list" data-index="<?php echo esc_attr($index); ?>">
