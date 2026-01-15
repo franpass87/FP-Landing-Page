@@ -18,6 +18,10 @@ namespace FPLandingPage;
 
 defined('ABSPATH') || exit;
 
+// Gestione errori per prevenire fatal errors
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+
 // Verifica versione PHP minima
 if (version_compare(PHP_VERSION, '5.6', '<')) {
     add_action('admin_notices', function() {
@@ -65,40 +69,51 @@ if (!defined('FP_LANDING_PAGE_BASENAME')) {
  */
 if (!function_exists('\\FPLandingPage\\find_composer_binary')) {
     function find_composer_binary() {
-        $paths = ['composer', 'composer.phar'];
-        
-        // Su Windows
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $paths = array_merge($paths, ['composer.bat']);
-        }
-        
-        // Percorsi comuni
-        $home = getenv('HOME');
-        if (empty($home)) {
-            $home = getenv('USERPROFILE');
-        }
-        $common_paths = [
-            '/usr/local/bin/composer',
-            '/usr/bin/composer',
-        ];
-        
-        if (!empty($home)) {
-            $common_paths[] = $home . '/.composer/vendor/bin/composer';
-            $common_paths[] = $home . '/.config/composer/vendor/bin/composer';
-        }
-        
-        $paths = array_merge($paths, $common_paths);
-        
-        foreach ($paths as $path) {
-            if (empty($path)) {
-                continue;
+        try {
+            $paths = array('composer', 'composer.phar');
+            
+            // Su Windows
+            if (function_exists('strtoupper') && function_exists('substr') && defined('PHP_OS')) {
+                if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                    $paths = array_merge($paths, array('composer.bat'));
+                }
             }
-            $output = [];
-            $return_var = 0;
-            @exec(escapeshellarg($path) . ' --version 2>&1', $output, $return_var);
-            if ($return_var === 0) {
-                return $path;
+            
+            // Percorsi comuni
+            $home = '';
+            if (function_exists('getenv')) {
+                $home = getenv('HOME');
+                if (empty($home)) {
+                    $home = getenv('USERPROFILE');
+                }
             }
+            $common_paths = array(
+                '/usr/local/bin/composer',
+                '/usr/bin/composer',
+            );
+            
+            if (!empty($home)) {
+                $common_paths[] = $home . '/.composer/vendor/bin/composer';
+                $common_paths[] = $home . '/.config/composer/vendor/bin/composer';
+            }
+            
+            $paths = array_merge($paths, $common_paths);
+            
+            foreach ($paths as $path) {
+                if (empty($path)) {
+                    continue;
+                }
+                if (function_exists('escapeshellarg') && function_exists('exec')) {
+                    $output = array();
+                    $return_var = 0;
+                    @exec(escapeshellarg($path) . ' --version 2>&1', $output, $return_var);
+                    if ($return_var === 0) {
+                        return $path;
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            // Ignora errori nella ricerca di composer
         }
         
         return false;
@@ -107,19 +122,26 @@ if (!function_exists('\\FPLandingPage\\find_composer_binary')) {
 
 if (!function_exists('\\FPLandingPage\\try_composer_install')) {
     function try_composer_install($plugin_dir) {
-        $composer_path = \FPLandingPage\find_composer_binary();
-        
-        if (!$composer_path) {
+        try {
+            if (!function_exists('\\FPLandingPage\\find_composer_binary')) {
+                return false;
+            }
+            $composer_path = \FPLandingPage\find_composer_binary();
+            
+            if (!$composer_path || !function_exists('escapeshellarg') || !function_exists('exec')) {
+                return false;
+            }
+            
+            $command = escapeshellarg($composer_path) . ' install --no-dev --optimize-autoloader --no-interaction --working-dir=' . escapeshellarg($plugin_dir) . ' 2>&1';
+            
+            $output = array();
+            $return_var = 0;
+            @exec($command, $output, $return_var);
+            
+            return $return_var === 0;
+        } catch (Exception $e) {
             return false;
         }
-        
-        $command = escapeshellarg($composer_path) . ' install --no-dev --optimize-autoloader --no-interaction --working-dir=' . escapeshellarg($plugin_dir) . ' 2>&1';
-        
-        $output = [];
-        $return_var = 0;
-        @exec($command, $output, $return_var);
-        
-        return $return_var === 0;
     }
 }
 
