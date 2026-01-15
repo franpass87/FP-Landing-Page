@@ -18,6 +18,9 @@ class Template {
      * Costruttore
      */
     public function __construct() {
+        // Registra template personalizzato se presente
+        add_filter('single_template', [$this, 'load_single_template']);
+        
         // Modifica il post content direttamente prima che venga mostrato
         add_filter('the_posts', [$this, 'inject_landing_page_content'], 10, 2);
         // Fallback: usa the_content
@@ -27,6 +30,23 @@ class Template {
         add_filter('body_class', [$this, 'add_landing_page_body_class']);
         // Fallback: carica script inline nel footer
         add_action('wp_footer', [$this, 'load_frontend_script_inline'], 999);
+    }
+    
+    /**
+     * Carica template personalizzato per landing page singola
+     */
+    public function load_single_template($template) {
+        global $post;
+        
+        if ($post && $post->post_type === 'fp_landing_page') {
+            $plugin_template = FP_LANDING_PAGE_DIR . 'templates/single-landing-page.php';
+            
+            if (file_exists($plugin_template)) {
+                return $plugin_template;
+            }
+        }
+        
+        return $template;
     }
     
     /**

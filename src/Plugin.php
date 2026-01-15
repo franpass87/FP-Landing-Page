@@ -88,7 +88,8 @@ class Plugin {
      * Inizializza i componenti del plugin
      */
     private function init_components() {
-        // Custom Post Type
+        // Custom Post Type - DEVE essere registrato per primo durante init
+        // Priorità alta per evitare problemi con rewrite rules
         if (class_exists('\FPLandingPage\PostTypes\LandingPage')) {
             \FPLandingPage\PostTypes\LandingPage::register();
         }

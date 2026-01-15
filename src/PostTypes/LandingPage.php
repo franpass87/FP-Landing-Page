@@ -20,8 +20,10 @@ class LandingPage {
      * Registra il post type
      */
     public static function register() {
-        add_action('init', [__CLASS__, 'register_post_type']);
-        add_action('init', [__CLASS__, 'register_taxonomies']);
+        // Registra direttamente invece di aggiungere hook durante init
+        // Questo evita problemi di timing
+        add_action('init', [__CLASS__, 'register_post_type'], 5);
+        add_action('init', [__CLASS__, 'register_taxonomies'], 5);
     }
     
     /**
@@ -48,7 +50,12 @@ class LandingPage {
             'show_ui'            => true,
             'show_in_menu'       => true,
             'query_var'          => true,
-            'rewrite'            => ['slug' => 'landing-page'],
+            'rewrite'            => [
+                'slug'       => 'landing-page',
+                'with_front' => false,
+                'feeds'      => false,
+                'pages'      => false,
+            ],
             'capability_type'    => 'post',
             'has_archive'        => false,
             'hierarchical'       => false,
