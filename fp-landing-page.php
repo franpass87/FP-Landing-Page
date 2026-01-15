@@ -136,21 +136,47 @@ if (!file_exists($autoload_path)) {
         }
     }
     
-    // Se ancora non esiste, mostra avviso
+    // Se ancora non esiste, mostra avviso e interrompi il caricamento
     if (!file_exists($autoload_path)) {
-        add_action('admin_notices', function() use ($composer_installed) {
-            if (!current_user_can('activate_plugins')) {
+        // Salva le informazioni necessarie in variabili locali
+        $composer_status = $composer_installed;
+        $plugin_dir_relative = defined('ABSPATH') ? str_replace(ABSPATH, '', FP_LANDING_PAGE_DIR) : 'wp-content/plugins/FP-Landing-Page/';
+        
+        // Disattiva il plugin se autoload non esiste (solo se non siamo già in fase di attivazione)
+        if (function_exists('deactivate_plugins') && !defined('WP_UNINSTALL_PLUGIN')) {
+            add_action('admin_init', function() {
+                if (current_user_can('activate_plugins')) {
+                    deactivate_plugins(FP_LANDING_PAGE_BASENAME);
+                }
+            }, 1);
+        }
+        
+        add_action('admin_notices', function() use ($composer_status, $plugin_dir_relative) {
+            if (!function_exists('current_user_can') || !current_user_can('activate_plugins')) {
                 return;
             }
-            $plugin_dir = esc_html(FP_LANDING_PAGE_DIR);
-            echo '<div class="notice notice-error"><p>';
-            echo '<strong>' . esc_html__('FP Landing Page:', 'fp-landing-page') . '</strong> ';
-            if ($composer_installed === false) {
-                echo esc_html__('Impossibile eseguire automaticamente composer install.', 'fp-landing-page') . ' ';
+            if (!function_exists('esc_html')) {
+                // Fallback se esc_html non è disponibile (molto raro)
+                $plugin_dir_safe = htmlspecialchars($plugin_dir_relative, ENT_QUOTES, 'UTF-8');
+                echo '<div class="notice notice-error"><p>';
+                echo '<strong>FP Landing Page:</strong> ';
+                if ($composer_status === false) {
+                    echo 'Impossibile eseguire automaticamente composer install. ';
+                }
+                echo 'Esegui manualmente: <code>composer install</code> ';
+                echo 'nella cartella del plugin: <code>' . $plugin_dir_safe . '</code>';
+                echo '</p></div>';
+            } else {
+                $plugin_dir = esc_html($plugin_dir_relative);
+                echo '<div class="notice notice-error"><p>';
+                echo '<strong>' . esc_html__('FP Landing Page:', 'fp-landing-page') . '</strong> ';
+                if ($composer_status === false) {
+                    echo esc_html__('Impossibile eseguire automaticamente composer install.', 'fp-landing-page') . ' ';
+                }
+                echo esc_html__('Esegui manualmente:', 'fp-landing-page') . ' <code>composer install</code> ';
+                echo esc_html__('nella cartella del plugin:', 'fp-landing-page') . ' <code>' . $plugin_dir . '</code>';
+                echo '</p></div>';
             }
-            echo esc_html__('Esegui manualmente:', 'fp-landing-page') . ' <code>composer install</code> ';
-            echo esc_html__('nella cartella del plugin:', 'fp-landing-page') . ' <code>' . $plugin_dir . '</code>';
-            echo '</p></div>';
         });
         return;
     }
