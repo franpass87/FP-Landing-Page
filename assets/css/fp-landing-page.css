@@ -665,9 +665,17 @@ a.fp-lp-button,
     background: #fff;
 }
 
+.fp-lp-faq-section {
+    --fp-lp-faq-icon-color: #333;
+    --fp-lp-faq-question-color: #1d2327;
+    --fp-lp-faq-answer-color: #555;
+    --fp-lp-faq-bg-color: #f8f8f8;
+}
+
 .fp-lp-faq-question {
     padding: 20px;
-    background: #f8f8f8;
+    background: var(--fp-lp-faq-bg-color, #f8f8f8);
+    color: var(--fp-lp-faq-question-color, #1d2327);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -688,6 +696,7 @@ a.fp-lp-button,
 .fp-lp-faq-icon {
     font-size: 24px;
     font-weight: 300;
+    color: var(--fp-lp-faq-icon-color, #333);
     transition: transform 0.3s ease;
 }
 
@@ -708,7 +717,7 @@ a.fp-lp-button,
 .fp-lp-faq-answer-content {
     padding: 20px 0;
     line-height: 1.8;
-    color: #555;
+    color: var(--fp-lp-faq-answer-color, #555);
 }
 
 .fp-lp-faq-answer-content p {
@@ -722,6 +731,11 @@ a.fp-lp-button,
 /* Sezione Tabs - Applica margini e padding standard */
 .fp-lp-section > .fp-lp-tabs-section,
 .fp-lp-tabs-section {
+    --fp-lp-tab-text-color: #666;
+    --fp-lp-tab-active-bg-color: #0073aa;
+    --fp-lp-tab-active-text-color: #0073aa;
+    --fp-lp-tab-border-color: #e0e0e0;
+    
     padding-top: 40px;
     padding-bottom: 40px;
     padding-left: 20px;
@@ -747,7 +761,7 @@ a.fp-lp-button,
 
 .fp-lp-tabs-nav {
     display: flex;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 2px solid var(--fp-lp-tab-border-color, #e0e0e0);
     margin-bottom: 20px;
     flex-wrap: wrap;
     gap: 0;
@@ -761,7 +775,7 @@ a.fp-lp-button,
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    color: #666;
+    color: var(--fp-lp-tab-text-color, #666);
     transition: all 0.3s ease;
     margin-bottom: -2px;
 }
@@ -772,9 +786,9 @@ a.fp-lp-button,
 }
 
 .fp-lp-tab-button.active {
-    color: #0073aa;
-    border-bottom-color: #0073aa;
-    background: #fff;
+    color: var(--fp-lp-tab-active-text-color, #0073aa);
+    border-bottom-color: var(--fp-lp-tab-active-bg-color, #0073aa);
+    background: var(--fp-lp-tab-active-bg-color, #fff);
 }
 
 .fp-lp-tabs-content {

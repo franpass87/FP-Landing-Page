@@ -1012,6 +1012,34 @@ class LandingPageBuilder {
         ?>
         <table class="form-table">
             <tr>
+                <th><label>Colore Testo Tab</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="text_color" value="<?php echo esc_attr(isset($data['text_color']) ? $data['text_color'] : ''); ?>" placeholder="#666" style="width: 200px;">
+                    <p class="description">Colore hex per il testo dei tab inattivi</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Sfondo Tab Attivo</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="active_bg_color" value="<?php echo esc_attr(isset($data['active_bg_color']) ? $data['active_bg_color'] : ''); ?>" placeholder="#0073aa" style="width: 200px;">
+                    <p class="description">Colore hex per lo sfondo del tab attivo</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Testo Tab Attivo</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="active_text_color" value="<?php echo esc_attr(isset($data['active_text_color']) ? $data['active_text_color'] : ''); ?>" placeholder="#0073aa" style="width: 200px;">
+                    <p class="description">Colore hex per il testo del tab attivo</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Colore Bordo</label></th>
+                <td>
+                    <input type="text" class="fp-lp-field" data-field="border_color" value="<?php echo esc_attr(isset($data['border_color']) ? $data['border_color'] : ''); ?>" placeholder="#e0e0e0" style="width: 200px;">
+                    <p class="description">Colore hex per il bordo inferiore dei tab</p>
+                </td>
+            </tr>
+            <tr>
                 <th><label>Tabs</label></th>
                 <td>
                     <div class="fp-lp-tabs-list" data-index="<?php echo esc_attr($index); ?>">

@@ -835,8 +835,32 @@ class Landing {
             return;
         }
         
+        // Colori personalizzabili per FAQ
+        $faq_icon_color = isset($data['icon_color']) ? $data['icon_color'] : '';
+        $faq_question_color = isset($data['question_color']) ? $data['question_color'] : '';
+        $faq_answer_color = isset($data['answer_color']) ? $data['answer_color'] : '';
+        $faq_bg_color = isset($data['bg_color']) ? $data['bg_color'] : '';
+        
+        $faq_style = '';
+        if ($faq_icon_color || $faq_question_color || $faq_answer_color || $faq_bg_color) {
+            $faq_style = ' style="';
+            if ($faq_icon_color) {
+                $faq_style .= '--fp-lp-faq-icon-color: ' . esc_attr($faq_icon_color) . ';';
+            }
+            if ($faq_question_color) {
+                $faq_style .= '--fp-lp-faq-question-color: ' . esc_attr($faq_question_color) . ';';
+            }
+            if ($faq_answer_color) {
+                $faq_style .= '--fp-lp-faq-answer-color: ' . esc_attr($faq_answer_color) . ';';
+            }
+            if ($faq_bg_color) {
+                $faq_style .= '--fp-lp-faq-bg-color: ' . esc_attr($faq_bg_color) . ';';
+            }
+            $faq_style .= '"';
+        }
+        
         ?>
-        <div class="fp-lp-faq-section">
+        <div class="fp-lp-faq-section"<?php echo $faq_style; ?>>
             <div class="fp-lp-faq-list">
                 <?php foreach ($faqs as $i => $faq): 
                     $question = isset($faq['question']) ? $faq['question'] : '';
@@ -875,10 +899,34 @@ class Landing {
             return;
         }
         
+        // Colori personalizzabili per Tab
+        $tab_text_color = isset($data['text_color']) ? $data['text_color'] : '';
+        $tab_active_bg_color = isset($data['active_bg_color']) ? $data['active_bg_color'] : '';
+        $tab_active_text_color = isset($data['active_text_color']) ? $data['active_text_color'] : '';
+        $tab_border_color = isset($data['border_color']) ? $data['border_color'] : '';
+        
+        $tabs_style = '';
+        if ($tab_text_color || $tab_active_bg_color || $tab_active_text_color || $tab_border_color) {
+            $tabs_style = ' style="';
+            if ($tab_text_color) {
+                $tabs_style .= '--fp-lp-tab-text-color: ' . esc_attr($tab_text_color) . ';';
+            }
+            if ($tab_active_bg_color) {
+                $tabs_style .= '--fp-lp-tab-active-bg-color: ' . esc_attr($tab_active_bg_color) . ';';
+            }
+            if ($tab_active_text_color) {
+                $tabs_style .= '--fp-lp-tab-active-text-color: ' . esc_attr($tab_active_text_color) . ';';
+            }
+            if ($tab_border_color) {
+                $tabs_style .= '--fp-lp-tab-border-color: ' . esc_attr($tab_border_color) . ';';
+            }
+            $tabs_style .= '"';
+        }
+        
         $tabs_id = 'fp-lp-tabs-' . uniqid();
         $first_active = true;
         ?>
-        <div class="fp-lp-tabs-section">
+        <div class="fp-lp-tabs-section"<?php echo $tabs_style; ?>>
             <div class="fp-lp-tabs-wrapper" id="<?php echo esc_attr($tabs_id); ?>">
                 <div class="fp-lp-tabs-nav">
                     <?php foreach ($tabs as $i => $tab): 
