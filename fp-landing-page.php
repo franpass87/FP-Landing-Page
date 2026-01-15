@@ -63,7 +63,7 @@ if (!defined('FP_LANDING_PAGE_BASENAME')) {
 /**
  * Funzioni helper per Composer
  */
-if (!function_exists('FPLandingPage\find_composer_binary')) {
+if (!function_exists('\\FPLandingPage\\find_composer_binary')) {
     function find_composer_binary() {
         $paths = ['composer', 'composer.phar'];
         
@@ -73,13 +73,16 @@ if (!function_exists('FPLandingPage\find_composer_binary')) {
         }
         
         // Percorsi comuni
-        $home = getenv('HOME') ?: getenv('USERPROFILE');
+        $home = getenv('HOME');
+        if (empty($home)) {
+            $home = getenv('USERPROFILE');
+        }
         $common_paths = [
             '/usr/local/bin/composer',
             '/usr/bin/composer',
         ];
         
-        if ($home) {
+        if (!empty($home)) {
             $common_paths[] = $home . '/.composer/vendor/bin/composer';
             $common_paths[] = $home . '/.config/composer/vendor/bin/composer';
         }
@@ -102,7 +105,7 @@ if (!function_exists('FPLandingPage\find_composer_binary')) {
     }
 }
 
-if (!function_exists('FPLandingPage\try_composer_install')) {
+if (!function_exists('\\FPLandingPage\\try_composer_install')) {
     function try_composer_install($plugin_dir) {
         $composer_path = \FPLandingPage\find_composer_binary();
         
