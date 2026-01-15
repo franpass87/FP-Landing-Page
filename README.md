@@ -7,7 +7,7 @@ Plugin WordPress per la gestione e creazione di landing page personalizzate **se
 
 ## Requisiti
 - WordPress 6.0+
-- PHP 7.4+
+- PHP 7.0+
 
 ## Caratteristiche
 

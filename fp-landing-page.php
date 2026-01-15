@@ -9,7 +9,7 @@
  * Text Domain: fp-landing-page
  * Domain Path: /languages
  * Requires at least: 6.0
- * Requires PHP: 7.4
+ * Requires PHP: 7.0
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -17,6 +17,31 @@
 namespace FPLandingPage;
 
 defined('ABSPATH') || exit;
+
+// Verifica versione PHP minima
+if (version_compare(PHP_VERSION, '7.0', '<')) {
+    add_action('admin_notices', function() {
+        if (!current_user_can('activate_plugins')) {
+            return;
+        }
+        echo '<div class="notice notice-error"><p>';
+        echo '<strong>' . esc_html__('FP Landing Page:', 'fp-landing-page') . '</strong> ';
+        echo sprintf(
+            esc_html__('Il plugin richiede PHP 7.0 o superiore. La versione attuale è %s. Aggiorna PHP per utilizzare questo plugin.', 'fp-landing-page'),
+            PHP_VERSION
+        );
+        echo '</p></div>';
+    });
+    
+    // Disattiva il plugin se possibile
+    if (function_exists('deactivate_plugins')) {
+        add_action('admin_init', function() {
+            deactivate_plugins(plugin_basename(__FILE__));
+        });
+    }
+    
+    return;
+}
 
 // Costanti del plugin
 if (!defined('FP_LANDING_PAGE_VERSION')) {
