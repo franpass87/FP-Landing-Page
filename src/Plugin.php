@@ -37,85 +37,92 @@ class Plugin {
      * Costruttore privato (singleton)
      */
     private function __construct() {
-        $this->init_hooks();
+        $this->init();
     }
     
     /**
      * Previene clonazione
      */
-    private function __clone() {
-        _doing_it_wrong(
-            __FUNCTION__,
-            __('Clonazione non permessa.', 'fp-landing-page'),
-            FP_LANDING_PAGE_VERSION
-        );
-    }
+    private function __clone() {}
     
     /**
      * Previene unserialize
      */
-    public function __wakeup() {
-        _doing_it_wrong(
-            __FUNCTION__,
-            __('Unserialize non permesso.', 'fp-landing-page'),
-            FP_LANDING_PAGE_VERSION
-        );
-    }
-    
-    /**
-     * Inizializza gli hook del plugin
-     */
-    private function init_hooks() {
-        // Hook per inizializzazione
-        add_action('init', [$this, 'init'], 0);
-    }
+    public function __wakeup() {}
     
     /**
      * Inizializza il plugin
      */
-    public function init() {
-        // Inizializzazione componenti
-        $this->init_components();
-    }
-    
-    /**
-     * Inizializza i componenti del plugin
-     */
-    private function init_components() {
-        // Custom Post Type
-        if (class_exists('\FPLandingPage\PostTypes\LandingPage')) {
-            \FPLandingPage\PostTypes\LandingPage::register();
-        }
+    private function init() {
+        // Verifica dipendenze Composer (solo se necessario e non già fatto di recente)
+        $this->check_composer_dependencies();
+        
+        // Hook per aggiornamenti plugin (Git Updater, ecc.)
+        add_action('upgrader_process_complete', [$this, 'handle_plugin_update'], 10, 2);
+        
+        // Custom Post Type - registra subito l'hook
+        add_action('init', [PostTypes\LandingPage::class, 'register_post_type']);
+        add_action('init', [PostTypes\LandingPage::class, 'register_taxonomies']);
         
         // Admin components
         if (is_admin()) {
-            if (class_exists('\FPLandingPage\Admin\MetaBoxes')) {
-                new \FPLandingPage\Admin\MetaBoxes();
-            }
-            
-            if (class_exists('\FPLandingPage\Admin\LandingPageBuilder')) {
-                new \FPLandingPage\Admin\LandingPageBuilder();
-            }
-            
-            // Integrazione con FP SEO Manager
-            if (class_exists('\FPLandingPage\Admin\SeoIntegration')) {
-                new \FPLandingPage\Admin\SeoIntegration();
-            }
-        }
-        
-        // REST API
-        if (class_exists('\FPLandingPage\REST\Controller')) {
-            new \FPLandingPage\REST\Controller();
+            new Admin\MetaBoxes();
+            Admin\LandingPageBuilder::get_instance();
+            new Admin\SeoIntegration();
         }
         
         // Shortcodes
-        if (class_exists('\FPLandingPage\Shortcodes\Landing')) {
-            \FPLandingPage\Shortcodes\Landing::register();
-        }
+        add_action('init', [Shortcodes\Landing::class, 'register']);
         
         // Template override
-        if (class_exists('\FPLandingPage\Template')) {
-            new \FPLandingPage\Template();
+        new Template();
+    }
+    
+    /**
+     * Gestisce l'aggiornamento del plugin
+     */
+    public function handle_plugin_update($upgrader_object, $options) {
+        if ($options['action'] === 'update' && $options['type'] === 'plugin') {
+            $plugin_file = plugin_basename(FP_LANDING_PAGE_FILE);
+            
+            // Verifica se questo plugin è stato aggiornato
+            if (isset($options['plugins']) && in_array($plugin_file, $options['plugins'])) {
+                // Esegui composer install dopo l'aggiornamento
+                Activation::ensure_composer_dependencies();
+                
+                // Cancella il transient per forzare un nuovo controllo
+                delete_transient('fp_landing_page_composer_check');
+            }
         }
+    }
+    
+    /**
+     * Verifica e installa dipendenze Composer se necessario
+     */
+    private function check_composer_dependencies() {
+        // Controlla solo una volta ogni ora per evitare overhead
+        $transient_key = 'fp_landing_page_composer_check';
+        $last_check = get_transient($transient_key);
+        
+        if ($last_check !== false) {
+            return; // Già controllato di recente
+        }
+        
+        $plugin_dir = dirname(FP_LANDING_PAGE_FILE);
+        $vendor_dir = $plugin_dir . '/vendor';
+        $composer_json = $plugin_dir . '/composer.json';
+        
+        // Se vendor non esiste ma composer.json sì, esegui composer install
+        if (!is_dir($vendor_dir) && file_exists($composer_json)) {
+            // Esegui in background per non bloccare il caricamento
+            if (is_admin()) {
+                add_action('admin_init', function() use ($plugin_dir) {
+                    Activation::ensure_composer_dependencies();
+                }, 1);
+            }
+        }
+        
+        // Imposta transient per non controllare di nuovo per 1 ora
+        set_transient($transient_key, time(), HOUR_IN_SECONDS);
     }
 }
