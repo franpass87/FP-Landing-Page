@@ -467,14 +467,27 @@
 .fp-lp-section-content .form-table input[type="text"],
 .fp-lp-section-content .form-table input[type="url"],
 .fp-lp-section-content .form-table input[type="number"],
-.fp-lp-section-content .form-table textarea,
-.fp-lp-section-content .form-table select {
+.fp-lp-section-content .form-table textarea {
     border-radius: 6px;
     border: 1px solid #8c8f94;
     padding: 8px 12px;
     font-size: 14px;
     transition: all 0.2s ease;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.fp-lp-section-content .form-table select {
+    border-radius: 6px;
+    border: 1px solid #8c8f94;
+    padding: 8px 35px 8px 12px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .fp-lp-section-content .form-table input[type="text"]:focus,
