@@ -411,7 +411,8 @@ Le impostazioni globali della landing page:
     "bg_color": "#ffffff",
     "text_color": "#333333",
     "header_style": "default",
-    "footer_text": "<p>Testo footer opzionale</p>"
+    "footer_text": "<p>Testo footer opzionale</p>",
+    "custom_css": "/* CSS personalizzato */\n.fp-landing-page-container {\n    /* Esempio */\n}"
   }
 }
 ```
@@ -421,6 +422,7 @@ Le impostazioni globali della landing page:
 - `text_color` (stringa): Colore testo globale
 - `header_style` (stringa): `default`, `transparent`, `hidden`
 - `footer_text` (stringa): Testo footer (HTML consentito)
+- `custom_css` (stringa): CSS personalizzato che verrà applicato solo a questa landing page (puoi usare `#fp-landing-page-{ID}` per targetizzare specificamente questa pagina)
 
 ---
 
