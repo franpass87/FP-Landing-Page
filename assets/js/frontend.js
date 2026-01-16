@@ -109,30 +109,84 @@
                 const $title = $(this);
                 let fontSize = '';
                 
-                if (breakpoint === 'mobile' && $title.data('font-size-mobile')) {
-                    fontSize = $title.data('font-size-mobile') + 'px';
-                } else if (breakpoint === 'tablet' && $title.data('font-size-tablet')) {
-                    fontSize = $title.data('font-size-tablet') + 'px';
-                } else if (breakpoint === 'desktop' && $title.data('font-size-desktop')) {
-                    fontSize = $title.data('font-size-desktop') + 'px';
+                // Rimuovi font-size inline precedente per permettere override
+                if (breakpoint === 'mobile') {
+                    const mobileSize = $title.attr('data-font-size-mobile');
+                    if (mobileSize) {
+                        fontSize = mobileSize + 'px';
+                    }
+                } else if (breakpoint === 'tablet') {
+                    const tabletSize = $title.attr('data-font-size-tablet');
+                    if (tabletSize) {
+                        fontSize = tabletSize + 'px';
+                    }
+                } else if (breakpoint === 'desktop') {
+                    const desktopSize = $title.attr('data-font-size-desktop');
+                    if (desktopSize) {
+                        fontSize = desktopSize + 'px';
+                    }
                 }
                 
                 if (fontSize) {
                     $title.css('font-size', fontSize);
+                } else {
+                    // Se non c'è un valore responsive per questo breakpoint, ripristina il valore base
+                    const baseFontSize = $title.data('base-font-size');
+                    if (baseFontSize) {
+                        $title.css('font-size', baseFontSize);
+                    }
                 }
             });
             
             // Applica allineamento responsive
-            $('.fp-lp-title-section, .fp-lp-text-section, .fp-lp-image-section, .fp-lp-cta-section').each(function() {
+            $('.fp-lp-title').each(function() {
+                const $title = $(this);
+                const $section = $title.closest('.fp-lp-title-section');
+                let align = '';
+                
+                // Per i titoli, i data attributes sono sul tag stesso
+                if (breakpoint === 'mobile') {
+                    const mobileAlign = $title.attr('data-align-mobile');
+                    if (mobileAlign && mobileAlign !== '' && mobileAlign !== 'general') {
+                        align = mobileAlign;
+                    }
+                } else if (breakpoint === 'tablet') {
+                    const tabletAlign = $title.attr('data-align-tablet');
+                    if (tabletAlign && tabletAlign !== '' && tabletAlign !== 'general') {
+                        align = tabletAlign;
+                    }
+                } else if (breakpoint === 'desktop') {
+                    const desktopAlign = $title.attr('data-align-desktop');
+                    if (desktopAlign && desktopAlign !== '' && desktopAlign !== 'general') {
+                        align = desktopAlign;
+                    }
+                }
+                
+                if (align) {
+                    $section.css('text-align', align);
+                }
+            });
+            
+            // Applica allineamento responsive per altre sezioni
+            $('.fp-lp-text-section, .fp-lp-image-section, .fp-lp-cta-section').each(function() {
                 const $section = $(this);
                 let align = '';
                 
-                if (breakpoint === 'mobile' && $section.data('align-mobile')) {
-                    align = $section.data('align-mobile');
-                } else if (breakpoint === 'tablet' && $section.data('align-tablet')) {
-                    align = $section.data('align-tablet');
-                } else if (breakpoint === 'desktop' && $section.data('align-desktop')) {
-                    align = $section.data('align-desktop');
+                if (breakpoint === 'mobile') {
+                    const mobileAlign = $section.attr('data-align-mobile');
+                    if (mobileAlign && mobileAlign !== '' && mobileAlign !== 'general') {
+                        align = mobileAlign;
+                    }
+                } else if (breakpoint === 'tablet') {
+                    const tabletAlign = $section.attr('data-align-tablet');
+                    if (tabletAlign && tabletAlign !== '' && tabletAlign !== 'general') {
+                        align = tabletAlign;
+                    }
+                } else if (breakpoint === 'desktop') {
+                    const desktopAlign = $section.attr('data-align-desktop');
+                    if (desktopAlign && desktopAlign !== '' && desktopAlign !== 'general') {
+                        align = desktopAlign;
+                    }
                 }
                 
                 if (align) {
@@ -158,6 +212,18 @@
                 }
             });
         }
+        
+        // Salva font-size base per i titoli al caricamento
+        $('.fp-lp-title').each(function() {
+            const $title = $(this);
+            // Se non c'è già un data-base-font-size, salvalo dallo style inline
+            if (!$title.data('base-font-size')) {
+                const currentFontSize = $title.css('font-size');
+                if (currentFontSize && currentFontSize !== '') {
+                    $title.attr('data-base-font-size', currentFontSize);
+                }
+            }
+        });
         
         // Applica al caricamento
         applyResponsiveStyles();

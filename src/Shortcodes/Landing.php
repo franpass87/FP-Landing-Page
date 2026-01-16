@@ -339,6 +339,10 @@ class Landing {
         
         // Data attributes per responsive
         $title_data = '';
+        // Salva il font-size base se presente
+        if ($font_size) {
+            $title_data .= ' data-base-font-size="' . esc_attr($font_size) . 'px"';
+        }
         if ($font_size_mobile) {
             $title_data .= ' data-font-size-mobile="' . esc_attr($font_size_mobile) . '"';
         }
@@ -348,13 +352,13 @@ class Landing {
         if ($font_size_desktop) {
             $title_data .= ' data-font-size-desktop="' . esc_attr($font_size_desktop) . '"';
         }
-        if ($align_mobile) {
+        if ($align_mobile && $align_mobile !== '') {
             $title_data .= ' data-align-mobile="' . esc_attr($align_mobile) . '"';
         }
-        if ($align_tablet) {
+        if ($align_tablet && $align_tablet !== '') {
             $title_data .= ' data-align-tablet="' . esc_attr($align_tablet) . '"';
         }
-        if ($align_desktop) {
+        if ($align_desktop && $align_desktop !== '') {
             $title_data .= ' data-align-desktop="' . esc_attr($align_desktop) . '"';
         }
         

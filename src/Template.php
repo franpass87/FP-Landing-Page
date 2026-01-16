@@ -302,6 +302,83 @@ class Template {
                     $button.addClass('active');
                     $tabsWrapper.find('#' + tabId).addClass('active');
                 });
+                
+                // Applica stili responsive inline (come fallback se frontend.js non è caricato)
+                function applyResponsiveStylesInline() {
+                    var width = window.innerWidth;
+                    var breakpoint = 'desktop';
+                    
+                    if (width < 768) {
+                        breakpoint = 'mobile';
+                    } else if (width < 1024) {
+                        breakpoint = 'tablet';
+                    }
+                    
+                    // Applica font-size responsive ai titoli
+                    $('.fp-lp-title').each(function() {
+                        var $title = $(this);
+                        var fontSize = '';
+                        
+                        if (breakpoint === 'mobile') {
+                            var mobileSize = $title.attr('data-font-size-mobile');
+                            if (mobileSize) {
+                                fontSize = mobileSize + 'px';
+                            }
+                        } else if (breakpoint === 'tablet') {
+                            var tabletSize = $title.attr('data-font-size-tablet');
+                            if (tabletSize) {
+                                fontSize = tabletSize + 'px';
+                            }
+                        } else if (breakpoint === 'desktop') {
+                            var desktopSize = $title.attr('data-font-size-desktop');
+                            if (desktopSize) {
+                                fontSize = desktopSize + 'px';
+                            }
+                        }
+                        
+                        if (fontSize) {
+                            $title.css('font-size', fontSize);
+                        }
+                    });
+                    
+                    // Applica allineamento responsive
+                    $('.fp-lp-title').each(function() {
+                        var $title = $(this);
+                        var $section = $title.closest('.fp-lp-title-section');
+                        var align = '';
+                        
+                        if (breakpoint === 'mobile') {
+                            var mobileAlign = $title.attr('data-align-mobile');
+                            if (mobileAlign && mobileAlign !== '' && mobileAlign !== 'general') {
+                                align = mobileAlign;
+                            }
+                        } else if (breakpoint === 'tablet') {
+                            var tabletAlign = $title.attr('data-align-tablet');
+                            if (tabletAlign && tabletAlign !== '' && tabletAlign !== 'general') {
+                                align = tabletAlign;
+                            }
+                        } else if (breakpoint === 'desktop') {
+                            var desktopAlign = $title.attr('data-align-desktop');
+                            if (desktopAlign && desktopAlign !== '' && desktopAlign !== 'general') {
+                                align = desktopAlign;
+                            }
+                        }
+                        
+                        if (align) {
+                            $section.css('text-align', align);
+                        }
+                    });
+                }
+                
+                // Applica al caricamento
+                applyResponsiveStylesInline();
+                
+                // Applica al ridimensionamento
+                var resizeTimerInline;
+                $(window).on('resize', function() {
+                    clearTimeout(resizeTimerInline);
+                    resizeTimerInline = setTimeout(applyResponsiveStylesInline, 100);
+                });
             });
         })(jQuery);
         </script>
