@@ -692,10 +692,13 @@ class Landing {
         $height_value = isset($data['height']) ? $data['height'] : 40;
         $height = absint($height_value);
         $color = isset($data['color']) ? $data['color'] : '';
+        $align = isset($data['align']) ? $data['align'] : 'left';
         
         if ($style === 'space') {
             ?>
-            <div class="fp-lp-separator fp-lp-separator-space" style="height: <?php echo esc_attr($height); ?>px;"></div>
+            <div class="fp-lp-separator-section">
+                <div class="fp-lp-separator fp-lp-separator-space" style="height: <?php echo esc_attr($height); ?>px;"></div>
+            </div>
             <?php
         } else {
             $border_style = in_array($style, ['solid', 'dashed', 'dotted']) ? $style : 'solid';
@@ -703,8 +706,13 @@ class Landing {
             if ($color) {
                 $separator_style .= ' border-top-color: ' . esc_attr($color) . ';';
             }
+            
+            // Wrapper per allineamento
+            $wrapper_style = 'text-align: ' . esc_attr($align) . ';';
             ?>
-            <div class="fp-lp-separator fp-lp-separator-<?php echo esc_attr($border_style); ?>" style="<?php echo $separator_style; ?>"></div>
+            <div class="fp-lp-separator-section" style="<?php echo $wrapper_style; ?>">
+                <div class="fp-lp-separator fp-lp-separator-<?php echo esc_attr($border_style); ?>" style="<?php echo $separator_style; ?>"></div>
+            </div>
             <?php
         }
     }

@@ -822,6 +822,17 @@ class LandingPageBuilder {
                     <p class="description">Colore hex per il bordo del separatore (non applicabile allo spazio)</p>
                 </td>
             </tr>
+            <tr>
+                <th><label>Allineamento</label></th>
+                <td>
+                    <select class="fp-lp-field" data-field="align">
+                        <option value="left" <?php selected((isset($data['align']) ? $data['align'] : 'left'), 'left'); ?>>Sinistra</option>
+                        <option value="center" <?php selected((isset($data['align']) ? $data['align'] : 'left'), 'center'); ?>>Centro</option>
+                        <option value="right" <?php selected((isset($data['align']) ? $data['align'] : 'left'), 'right'); ?>>Destra</option>
+                    </select>
+                    <p class="description">Allineamento del separatore (solo per linee, non applicabile allo spazio)</p>
+                </td>
+            </tr>
         </table>
         <?php
     }
