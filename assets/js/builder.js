@@ -526,18 +526,28 @@
                 $(document).on('click', '.fp-lp-add-faq', function(e) {
                     e.preventDefault();
                     const $section = $(this).closest('.fp-lp-section-item');
-                    const $list = $section.find('.fp-lp-faq-list');
+                    const $list = $section.find('.fp-lp-faqs-list');
                     const newIndex = $list.find('.fp-lp-faq-item').length;
                     $list.append(`
-                        <div class="fp-lp-faq-item" data-faq-index="${newIndex}">
-                            <div class="fp-lp-faq-header">
-                                <span>FAQ ${newIndex + 1}</span>
-                                <button type="button" class="button button-small fp-lp-remove-faq">Rimuovi</button>
+                        <div class="fp-lp-faq-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; background: #f9f9f9;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <strong>FAQ #${newIndex + 1}</strong>
+                                <button type="button" class="button fp-lp-remove-faq" data-index="${$section.data('index')}" data-faq-index="${newIndex}">Rimuovi</button>
                             </div>
-                            <div class="fp-lp-faq-content">
-                                <p><label>Domanda:</label><input type="text" class="fp-lp-faq-field" data-field="question" data-faq-index="${newIndex}" style="width:100%;"></p>
-                                <p><label>Risposta:</label><textarea class="fp-lp-faq-field" data-field="answer" data-faq-index="${newIndex}" rows="3" style="width:100%;"></textarea></p>
-                            </div>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="padding: 5px 0;"><label>Domanda</label></td>
+                                    <td style="padding: 5px 0;">
+                                        <input type="text" class="fp-lp-faq-field" data-field="question" data-faq-index="${newIndex}" value="" style="width: 100%;" placeholder="La domanda frequente">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px 0;"><label>Risposta</label></td>
+                                    <td style="padding: 5px 0;">
+                                        <textarea class="fp-lp-faq-field" data-field="answer" data-faq-index="${newIndex}" rows="4" style="width: 100%;" placeholder="La risposta alla domanda"></textarea>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     `);
                     self.updateSectionsData();
