@@ -225,6 +225,10 @@ class ImportManager {
             if (isset($settings['footer_text'])) {
                 update_post_meta($post_id, '_fp_landing_footer_text', wp_kses_post($settings['footer_text']));
             }
+            
+            if (isset($settings['custom_css'])) {
+                update_post_meta($post_id, '_fp_landing_custom_css', sanitize_textarea_field($settings['custom_css']));
+            }
         }
         
         // Inserisci lo shortcode nel contenuto

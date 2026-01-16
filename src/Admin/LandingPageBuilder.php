@@ -103,6 +103,30 @@ class LandingPageBuilder {
                 <?php endif; ?>
             </div>
             
+            <!-- Impostazioni Globali -->
+            <div class="fp-lp-global-settings" style="margin-top: 30px; padding: 20px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px;">
+                <h3 style="margin-top: 0;"><?php _e('Impostazioni Globali', 'fp-landing-page'); ?></h3>
+                <table class="form-table">
+                    <tr>
+                        <th><label for="fp_landing_custom_css"><?php _e('CSS Personalizzato', 'fp-landing-page'); ?></label></th>
+                        <td>
+                            <?php 
+                            $custom_css = get_post_meta($post->ID, '_fp_landing_custom_css', true);
+                            ?>
+                            <textarea id="fp_landing_custom_css" name="fp_landing_custom_css" rows="10" style="width: 100%; font-family: 'Courier New', monospace; font-size: 13px;" placeholder="/* Inserisci qui il tuo CSS personalizzato */
+.fp-landing-page-container {
+    /* Esempio */
+}"><?php echo esc_textarea($custom_css); ?></textarea>
+                            <p class="description">
+                                <?php _e('Inserisci CSS personalizzato che verrà applicato solo a questa landing page. Puoi usare il selettore', 'fp-landing-page'); ?> 
+                                <code>#fp-landing-page-<?php echo esc_attr($post->ID); ?></code> 
+                                <?php _e('per targetizzare specificamente questa pagina.', 'fp-landing-page'); ?>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
             <input type="hidden" id="fp-lp-sections-data" name="fp_landing_page_sections_data" value="<?php echo esc_attr(json_encode($sections)); ?>">
         </div>
         <?php
@@ -1383,6 +1407,15 @@ class LandingPageBuilder {
                     add_action('save_post', [$this, 'save_builder_data'], 10, 2);
                 }
             }
+        }
+        
+        // Salva CSS personalizzato
+        if (isset($_POST['fp_landing_custom_css'])) {
+            $custom_css = sanitize_textarea_field($_POST['fp_landing_custom_css']);
+            update_post_meta($post_id, '_fp_landing_custom_css', $custom_css);
+        } else {
+            // Se non inviato (es. import), rimuovi il meta
+            delete_post_meta($post_id, '_fp_landing_custom_css');
         }
     }
     

@@ -203,6 +203,13 @@ class Template {
             echo 'body.fp-landing-page-body .site-header { display: none; }';
         }
         
+        // CSS personalizzato globale
+        $custom_css = get_post_meta($post->ID, '_fp_landing_custom_css', true);
+        if ($custom_css) {
+            echo "\n/* CSS Personalizzato Landing Page */\n";
+            echo $custom_css;
+        }
+        
         echo '</style>';
     }
     
