@@ -439,16 +439,44 @@
                     const $list = $section.find('.fp-lp-features-list');
                     const newIndex = $list.find('.fp-lp-feature-item').length;
                     $list.append(`
-                        <div class="fp-lp-feature-item" data-feature-index="${newIndex}">
-                            <div class="fp-lp-feature-header">
-                                <span>Feature ${newIndex + 1}</span>
-                                <button type="button" class="button button-small fp-lp-remove-feature">Rimuovi</button>
+                        <div class="fp-lp-feature-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; background: #f9f9f9;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <strong>Feature #${newIndex + 1}</strong>
+                                <button type="button" class="button fp-lp-remove-feature" data-index="${$section.data('index')}" data-feature-index="${newIndex}">Rimuovi</button>
                             </div>
-                            <div class="fp-lp-feature-content">
-                                <p><label>Icona:</label><input type="text" class="fp-lp-feature-field" data-field="icon" data-feature-index="${newIndex}" placeholder="fa fa-star" style="width:100%;"></p>
-                                <p><label>Titolo:</label><input type="text" class="fp-lp-feature-field" data-field="title" data-feature-index="${newIndex}" placeholder="Titolo" style="width:100%;"></p>
-                                <p><label>Testo:</label><textarea class="fp-lp-feature-field" data-field="text" data-feature-index="${newIndex}" rows="2" style="width:100%;"></textarea></p>
-                            </div>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="padding: 5px 0;"><label>Icona</label></td>
+                                    <td style="padding: 5px 0;">
+                                        <div style="display: flex; gap: 5px; align-items: center;">
+                                            <input type="text" class="fp-lp-feature-field fp-lp-icon-input" data-field="icon" data-feature-index="${newIndex}" value="" style="flex: 1;" placeholder="fa fa-star">
+                                            <button type="button" class="button fp-lp-icon-picker-btn" data-target-input=".fp-lp-feature-field[data-feature-index='${newIndex}'][data-field='icon']">
+                                                <span class="dashicons dashicons-admin-appearance"></span> Scegli Icona
+                                            </button>
+                                        </div>
+                                        <p class="description">Seleziona un'icona dalla libreria o inserisci manualmente la classe CSS</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px 0;"><label>Colore Icona</label></td>
+                                    <td style="padding: 5px 0;">
+                                        <input type="text" class="fp-lp-feature-field" data-field="icon_color" data-feature-index="${newIndex}" value="" style="width: 200px;" placeholder="#0073aa">
+                                        <p class="description">Colore hex personalizzato per questa icona (opzionale)</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px 0;"><label>Titolo</label></td>
+                                    <td style="padding: 5px 0;">
+                                        <input type="text" class="fp-lp-feature-field" data-field="title" data-feature-index="${newIndex}" value="" style="width: 100%;" placeholder="Titolo feature">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px 0;"><label>Testo</label></td>
+                                    <td style="padding: 5px 0;">
+                                        <textarea class="fp-lp-feature-field" data-field="text" data-feature-index="${newIndex}" rows="3" style="width: 100%;" placeholder="Descrizione feature"></textarea>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     `);
                     self.updateSectionsData();
@@ -1020,16 +1048,44 @@
                             </tr>
                         </table>
                         <div class="fp-lp-features-list">
-                            <div class="fp-lp-feature-item" data-feature-index="0">
-                                <div class="fp-lp-feature-header">
-                                    <span>Feature 1</span>
-                                    <button type="button" class="button button-small fp-lp-remove-feature">Rimuovi</button>
+                            <div class="fp-lp-feature-item" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; background: #f9f9f9;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <strong>Feature #1</strong>
+                                    <button type="button" class="button fp-lp-remove-feature" style="display:none;">Rimuovi</button>
                                 </div>
-                                <div class="fp-lp-feature-content">
-                                    <p><label>Icona (classe CSS):</label><input type="text" class="fp-lp-feature-field" data-field="icon" data-feature-index="0" placeholder="fa fa-star" style="width:100%;"></p>
-                                    <p><label>Titolo:</label><input type="text" class="fp-lp-feature-field" data-field="title" data-feature-index="0" placeholder="Titolo feature" style="width:100%;"></p>
-                                    <p><label>Testo:</label><textarea class="fp-lp-feature-field" data-field="text" data-feature-index="0" rows="2" style="width:100%;"></textarea></p>
-                                </div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="padding: 5px 0;"><label>Icona</label></td>
+                                        <td style="padding: 5px 0;">
+                                            <div style="display: flex; gap: 5px; align-items: center;">
+                                                <input type="text" class="fp-lp-feature-field fp-lp-icon-input" data-field="icon" data-feature-index="0" value="" style="flex: 1;" placeholder="fa fa-star">
+                                                <button type="button" class="button fp-lp-icon-picker-btn" data-target-input=".fp-lp-feature-field[data-feature-index='0'][data-field='icon']">
+                                                    <span class="dashicons dashicons-admin-appearance"></span> Scegli Icona
+                                                </button>
+                                            </div>
+                                            <p class="description">Seleziona un'icona dalla libreria o inserisci manualmente la classe CSS</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px 0;"><label>Colore Icona</label></td>
+                                        <td style="padding: 5px 0;">
+                                            <input type="text" class="fp-lp-feature-field" data-field="icon_color" data-feature-index="0" value="" style="width: 200px;" placeholder="#0073aa">
+                                            <p class="description">Colore hex personalizzato per questa icona (opzionale)</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px 0;"><label>Titolo</label></td>
+                                        <td style="padding: 5px 0;">
+                                            <input type="text" class="fp-lp-feature-field" data-field="title" data-feature-index="0" value="" style="width: 100%;" placeholder="Titolo feature">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px 0;"><label>Testo</label></td>
+                                        <td style="padding: 5px 0;">
+                                            <textarea class="fp-lp-feature-field" data-field="text" data-feature-index="0" rows="3" style="width: 100%;" placeholder="Descrizione feature"></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                         <button type="button" class="button fp-lp-add-feature">+ Aggiungi Feature</button>
